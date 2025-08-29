@@ -1,4 +1,26 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+
 export default function ContactPage() {
+  const router = useRouter()
+  const [submitting, setSubmitting] = useState(false)
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    setSubmitting(true)
+    try {
+      await fetch("/api/contact", { method: "POST", body: formData })
+      router.push("/contact/success")
+    } catch (_) {
+      setSubmitting(false)
+      alert("Something went wrong. Please try again.")
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background py-16 px-6">
       <div className="max-w-2xl mx-auto">
@@ -7,13 +29,7 @@ export default function ContactPage() {
           Fill out the form below and I’ll get back to you shortly.
         </p>
 
-        <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/contact/success" className="space-y-6 bg-card p-6 rounded-lg border">
-          <input type="hidden" name="form-name" value="contact" />
-          <p className="hidden">
-            <label>
-              Don’t fill this out: <input name="bot-field" />
-            </label>
-          </p>
+        <form onSubmit={onSubmit} className="space-y-6 bg-card p-6 rounded-lg border">
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
@@ -37,8 +53,8 @@ export default function ContactPage() {
           </div>
 
           <div className="flex justify-end">
-            <button type="submit" className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 transition">
-              Send Message
+            <button type="submit" disabled={submitting} className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 transition disabled:opacity-60">
+              {submitting ? "Sending…" : "Send Message"}
             </button>
           </div>
         </form>
