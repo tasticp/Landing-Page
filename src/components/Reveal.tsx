@@ -5,12 +5,10 @@ import { useEffect, useRef, useState } from "react"
 type RevealProps = {
   children: React.ReactNode
   className?: string
-  as?: keyof JSX.IntrinsicElements
   delayMs?: number
 }
 
-export default function Reveal({ children, className, as = "div", delayMs = 0 }: RevealProps) {
-  const Container: React.ElementType = as
+export default function Reveal({ children, className, delayMs = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -38,14 +36,14 @@ export default function Reveal({ children, className, as = "div", delayMs = 0 }:
   }, [delayMs])
 
   return (
-    <Container
+    <div
       ref={ref}
       className={`${className ?? ""} transition-all duration-700 will-change-transform ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
     >
       {children}
-    </Container>
+    </div>
   )
 }
 
