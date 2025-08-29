@@ -1,5 +1,7 @@
 # Landing-Page
-Vide Coded with same.new
+Vide Coded Using:
+same.new
+Cursor AI
 
 ## Getting Started
 
