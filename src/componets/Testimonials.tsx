@@ -4,19 +4,19 @@ export default function Testimonials() {
       name: "Sarah Thompson",
       role: "Product Manager, TechCorp",
       quote:
-        "Alex consistently delivered high-quality features on time. Communication was clear and proactive throughout.",
+        "We Know.",
     },
     {
       name: "Michael Chen",
       role: "CTO, StartupXYZ",
       quote:
-        "We saw a measurable lift in conversion after Alex refactored our frontend and improved performance.",
+        "We Make.",
     },
     {
       name: "Priya Patel",
       role: "Founder, EduNext",
       quote:
-        "A pleasure to work with. From ideation to launch, Alex was thorough and detail-oriented.",
+        "We Show",
     },
   ]
 

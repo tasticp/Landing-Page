@@ -3,22 +3,28 @@ import Reveal from "@/components/Reveal"
 export default function Testimonials() {
   const testimonials = [
     {
-      name: "Sarah Thompson",
-      role: "Product Manager, TechCorp",
+      name: "Major Major",
+      role: "Lieutenant, TechCorp",
       quote:
-        "Alex consistently delivered high-quality features on time. Communication was clear and proactive throughout.",
+        "We See.",
     },
     {
-      name: "Michael Chen",
+      name: "Karen Blonde",
       role: "CTO, StartupXYZ",
       quote:
-        "We saw a measurable lift in conversion after Alex refactored our frontend and improved performance.",
+        "We Hear.",
     },
     {
-      name: "Priya Patel",
-      role: "Founder, EduNext",
+      name: "Prata Man",
+      role: "Founder, VCnow",
       quote:
-        "A pleasure to work with. From ideation to launch, Alex was thorough and detail-oriented.",
+        "We Smell.",
+    },
+    {
+      name: "Pastor Jeff",
+      role: "Founder, FutureVC",
+      quote:
+        "We Feel.",
     },
   ]
 

@@ -102,9 +102,17 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <Reveal>
-            <Card className="card-hover">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Frontend Developer</h3>
+            <Card className="card-hover group hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">F</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Frontend Developer</h3>
+                    <p className="text-sm text-muted-foreground">User-facing experiences</p>
+                  </div>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">React</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Next.js</Badge>
@@ -117,9 +125,17 @@ export default function Home() {
             </Reveal>
 
             <Reveal delayMs={100}>
-            <Card className="card-hover">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Back-End Developer</h3>
+            <Card className="card-hover group hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">B</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Backend Developer</h3>
+                    <p className="text-sm text-muted-foreground">Server-side logic & APIs</p>
+                  </div>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Node.js</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Python</Badge>
@@ -132,20 +148,33 @@ export default function Home() {
             </Reveal>
 
             <Reveal delayMs={200}>
-            <Card className="card-hover">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Tools, Cloud & Workflow</h3>
+            <Card className="card-hover group hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">T</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Tools & Workflow</h3>
+                    <p className="text-sm text-muted-foreground">Development environment</p>
+                  </div>
+                </div>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary" className="hover:scale-105 transition-transform">AWS</Badge>
-                  <Badge variant="secondary" className="hover:scale-105 transition-transform">Docker</Badge>
-                  <Badge variant="secondary" className="hover:scale-105 transition-transform">Kubernetes</Badge>
-                  <Badge variant="secondary" className="hover:scale-105 transition-transform">Git</Badge>
-                  <Badge variant="secondary" className="hover:scale-105 transition-transform">Figma</Badge>
-                  <Badge variant="secondary" className="hover:scale-105 transition-transform">VSCode</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform flex items-center gap-1">
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M15.5 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.5 6.75a.75.75 0 00-1.5 0v2.25a.75.75 0 001.5 0V6.75zM6 15.75a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H6.75a.75.75 0 01-.75-.75zM18.75 12a.75.75 0 00-.75.75v2.25a.75.75 0 001.5 0V12.75a.75.75 0 00-.75-.75z"/>
+                    </svg>
+                    VSCode
+                  </Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Cursor</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Bun</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">same.new</Badge>
-                  <Badge variant="secondary" className="hover:scale-105 transition-transform">GitHub</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform flex items-center gap-1">
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                    </svg>
+                    GitHub
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
@@ -270,11 +299,8 @@ export default function Home() {
                   <Badge variant="secondary">Stripe</Badge>
                 </div>
                 <div className="flex gap-2">
-                  <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs hover:bg-accent transition-colors">
+                  <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs hover:bg-accent transition-colors">
                     <Github className="w-4 h-4" /> Code
-                  </a>
-                  <a href="https://rawcdn.githack.com/tasticp/Welcome-to-the-internet/75f75f554e1d5aaa40d3cd22d7cd5997e26c4d4e/README.md" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
-                    <ExternalLink className="w-4 h-4" /> Live Demo
                   </a>
                   <Link href="/projects/ecommerce-platform" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
                     <ExternalLink className="w-4 h-4" /> Case Study
@@ -301,11 +327,8 @@ export default function Home() {
                   <Badge variant="secondary">Express</Badge>
                 </div>
                 <div className="flex gap-2">
-                  <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs hover:bg-accent transition-colors">
+                  <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs hover:bg-accent transition-colors">
                     <Github className="w-4 h-4" /> Code
-                  </a>
-                  <a href="https://rawcdn.githack.com/tasticp/Welcome-to-the-internet/75f75f554e1d5aaa40d3cd22d7cd5997e26c4d4e/README.md" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
-                    <ExternalLink className="w-4 h-4" /> Live Demo
                   </a>
                   <Link href="/projects/task-management-app" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
                     <ExternalLink className="w-4 h-4" /> Case Study

@@ -5,6 +5,9 @@ export default function BlogIndexPage() {
   return (
     <div className="min-h-screen bg-background py-16 px-6">
       <div className="max-w-3xl mx-auto">
+        <div className="flex items-center gap-4 mb-6">
+          <Link href="/" className="text-sm text-muted-foreground hover:underline">← Back to home</Link>
+        </div>
         <h1 className="text-3xl md:text-4xl font-bold mb-6">Blog</h1>
         <p className="text-muted-foreground mb-10">Insights on development, architecture, and performance.</p>
 
