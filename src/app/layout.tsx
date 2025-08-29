@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Johnson - Full-Stack Developer",
+  title: "Tasticp_ - Vibe Developer",
   description: "Passionate about building exceptional web applications and exploring new technologies.",
 };
 
@@ -30,7 +30,7 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

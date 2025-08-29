@@ -16,7 +16,7 @@ export default function Home() {
       <nav className="border-b backdrop-blur-sm sticky top-0 z-50 bg-background/80">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="font-bold text-xl">Alex Johnson</div>
+            <div className="font-bold text-xl">Tasticp_</div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About</a>
               <a href="#experience" className="text-muted-foreground hover:text-foreground transition-colors">Experience</a>
@@ -40,37 +40,36 @@ export default function Home() {
               <div className="space-y-2">
                 <p className="text-muted-foreground text-lg">Hi there! 👋</p>
                 <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                  I'm Alex Johnson, <br />
-                  <span className="gradient-text">Full-Stack Developer</span>
+                  I'm Tasticp_, <br />
+                  <span className="gradient-text">Vibe Developer</span>
                 </h1>
               </div>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Passionate about building exceptional web applications and exploring new technologies.
-                I spend most of my time crafting digital experiences that make a difference.
+                Passionate about building exceptional applications and exploring new technologies.
+                I spend most of my time crafting digital experiences that make you question me.
               </p>
               <div className="flex items-center gap-4 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>San Francisco, CA</span>
+                <span>Singapore, Singapore</span>
               </div>
               <div className="flex gap-4">
-                <Button size="lg" className="gap-2 glow-on-hover">
-                  <Download className="w-4 h-4" />
-                  Resume
-                </Button>
+                <a href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 transition">
+                  <Download className="w-4 h-4" /> Resume
+                </a>
                 <Link href="/contact" className="inline-flex items-center gap-2 rounded-md border px-4 py-2 hover:bg-accent transition-colors">
                   <Mail className="w-4 h-4" /> Get in Touch
                 </Link>
               </div>
               <div className="flex gap-4">
-                <Button variant="ghost" size="sm" className="hover:scale-110 transition-transform">
+                <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-2 py-2 hover:scale-110 transition-transform">
                   <Github className="w-5 h-5" />
-                </Button>
-                <Button variant="ghost" size="sm" className="hover:scale-110 transition-transform">
+                </a>
+                <a href="https://www.linkedin.com/in/kelvin-cheong-tasticp/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-2 py-2 hover:scale-110 transition-transform">
                   <Linkedin className="w-5 h-5" />
-                </Button>
-                <Button variant="ghost" size="sm" className="hover:scale-110 transition-transform">
+                </a>
+                <a href="mailto:ricksue99@gmail.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-2 py-2 hover:scale-110 transition-transform">
                   <Mail className="w-5 h-5" />
-                </Button>
+                </a>
               </div>
             </Reveal>
             <Reveal className="flex justify-center" delayMs={100}>
@@ -105,7 +104,7 @@ export default function Home() {
             <Reveal>
             <Card className="card-hover">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Frontend</h3>
+                <h3 className="text-xl font-semibold mb-4">Frontend Developer</h3>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">React</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Next.js</Badge>
@@ -120,7 +119,7 @@ export default function Home() {
             <Reveal delayMs={100}>
             <Card className="card-hover">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Backend</h3>
+                <h3 className="text-xl font-semibold mb-4">Back-End Developer</h3>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Node.js</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Python</Badge>
@@ -135,13 +134,18 @@ export default function Home() {
             <Reveal delayMs={200}>
             <Card className="card-hover">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Tools & Cloud</h3>
+                <h3 className="text-xl font-semibold mb-4">Tools, Cloud & Workflow</h3>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">AWS</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Docker</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Kubernetes</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Git</Badge>
                   <Badge variant="secondary" className="hover:scale-105 transition-transform">Figma</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform">VSCode</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform">Cursor</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform">Bun</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform">same.new</Badge>
+                  <Badge variant="secondary" className="hover:scale-105 transition-transform">GitHub</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -165,20 +169,18 @@ export default function Home() {
                 <div className="flex items-start gap-4">
                   <Avatar className="w-12 h-12">
                     <AvatarImage src="/api/placeholder/48/48" />
-                    <AvatarFallback className="bg-blue-100 text-blue-600">TC</AvatarFallback>
+                    <AvatarFallback className="bg-blue-100 text-blue-600">SB</AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h3 className="text-xl font-semibold">Senior Full-Stack Developer</h3>
-                        <p className="text-blue-600 font-medium">TechCorp Inc.</p>
+                        <h3 className="text-xl font-semibold">Sembawang Secondary School</h3>
+                        <p className="text-blue-600 font-medium">Secondary Education</p>
                       </div>
-                      <Badge variant="outline">2022 - Present</Badge>
+                      <Badge variant="outline">—</Badge>
                     </div>
                     <ul className="text-muted-foreground space-y-1">
-                      <li>• Led development of microservices architecture serving 1M+ users</li>
-                      <li>• Implemented CI/CD pipelines reducing deployment time by 60%</li>
-                      <li>• Mentored 5 junior developers and conducted code reviews</li>
+                      <li>• Completed secondary education at Sembawang Secondary</li>
                     </ul>
                   </div>
                 </div>
@@ -192,20 +194,43 @@ export default function Home() {
                 <div className="flex items-start gap-4">
                   <Avatar className="w-12 h-12">
                     <AvatarImage src="/api/placeholder/48/48" />
-                    <AvatarFallback className="bg-green-100 text-green-600">ST</AvatarFallback>
+                    <AvatarFallback className="bg-green-100 text-green-600">ITE</AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h3 className="text-xl font-semibold">Full-Stack Developer</h3>
-                        <p className="text-blue-600 font-medium">StartupXYZ</p>
+                        <h3 className="text-xl font-semibold">ITE (Institute of Technical Education)</h3>
+                        <p className="text-blue-600 font-medium">Technical Studies</p>
                       </div>
-                      <Badge variant="outline">2020 - 2022</Badge>
+                      <Badge variant="outline">—</Badge>
                     </div>
                     <ul className="text-muted-foreground space-y-1">
-                      <li>• Built React-based SaaS platform from scratch</li>
-                      <li>• Developed RESTful APIs using Node.js and PostgreSQL</li>
-                      <li>• Integrated payment processing and subscription management</li>
+                      <li>• Coursework and hands-on technical projects</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            </Reveal>
+
+            <Reveal delayMs={200}>
+            <Card className="card-hover">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <Avatar className="w-12 h-12">
+                    <AvatarImage src="/api/placeholder/48/48" />
+                    <AvatarFallback className="bg-blue-100 text-blue-600">NP</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h3 className="text-xl font-semibold">Ngee Ann Polytechnic</h3>
+                        <p className="text-blue-600 font-medium">Diploma Studies</p>
+                      </div>
+                      <Badge variant="outline">—</Badge>
+                    </div>
+                    <ul className="text-muted-foreground space-y-1">
+                      <li>• Specialized modules and capstone project work</li>
                     </ul>
                   </div>
                 </div>
@@ -220,8 +245,11 @@ export default function Home() {
       <section id="projects" className="py-20 px-6 bg-muted/50">
         <div className="max-w-6xl mx-auto">
           <Reveal className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
-            <p className="text-xl text-muted-foreground">Some of my recent work</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">Featured Projects</h2>
+            <p className="text-xl text-muted-foreground mb-4">Some of my recent work</p>
+            <Link href="/projects" className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline">
+              Learn more →
+            </Link>
           </Reveal>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -242,10 +270,12 @@ export default function Home() {
                   <Badge variant="secondary">Stripe</Badge>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="gap-2">
-                    <Github className="w-4 h-4" />
-                    Code
-                  </Button>
+                  <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs hover:bg-accent transition-colors">
+                    <Github className="w-4 h-4" /> Code
+                  </a>
+                  <a href="https://rawcdn.githack.com/tasticp/Welcome-to-the-internet/75f75f554e1d5aaa40d3cd22d7cd5997e26c4d4e/README.md" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
+                    <ExternalLink className="w-4 h-4" /> Live Demo
+                  </a>
                   <Link href="/projects/ecommerce-platform" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
                     <ExternalLink className="w-4 h-4" /> Case Study
                   </Link>
@@ -271,10 +301,12 @@ export default function Home() {
                   <Badge variant="secondary">Express</Badge>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="gap-2">
-                    <Github className="w-4 h-4" />
-                    Code
-                  </Button>
+                  <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs hover:bg-accent transition-colors">
+                    <Github className="w-4 h-4" /> Code
+                  </a>
+                  <a href="https://rawcdn.githack.com/tasticp/Welcome-to-the-internet/75f75f554e1d5aaa40d3cd22d7cd5997e26c4d4e/README.md" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
+                    <ExternalLink className="w-4 h-4" /> Live Demo
+                  </a>
                   <Link href="/projects/task-management-app" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
                     <ExternalLink className="w-4 h-4" /> Case Study
                   </Link>
@@ -299,10 +331,9 @@ export default function Home() {
             <Link href="/contact" className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 transition">
               <Mail className="w-4 h-4" /> Get in Touch
             </Link>
-            <Button variant="outline" size="lg" className="gap-2">
-              <Download className="w-4 h-4" />
-              Download Resume
-            </Button>
+            <a href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border px-4 py-2 hover:bg-accent transition-colors">
+              <Download className="w-4 h-4" /> Download Resume
+            </a>
           </div>
         </div>
       </section>
@@ -313,17 +344,17 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t py-8 px-6">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <p className="text-muted-foreground">© 2025 Alex Johnson. All rights reserved.</p>
+          <p className="text-muted-foreground">© 2025 Tasticp_. All rights reserved.</p>
           <div className="flex gap-4">
-            <Button variant="ghost" size="sm" className="hover:scale-110 transition-transform">
+            <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-2 py-2 hover:scale-110 transition-transform">
               <Github className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm" className="hover:scale-110 transition-transform">
+            </a>
+            <a href="https://www.linkedin.com/in/kelvin-cheong-tasticp/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-2 py-2 hover:scale-110 transition-transform">
               <Linkedin className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm" className="hover:scale-110 transition-transform">
+            </a>
+            <a href="mailto:ricksue99@gmail.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-2 py-2 hover:scale-110 transition-transform">
               <Mail className="w-4 h-4" />
-            </Button>
+            </a>
           </div>
         </div>
       </footer>
