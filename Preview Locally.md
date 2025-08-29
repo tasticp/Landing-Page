@@ -1,10 +1,15 @@
 Preview locally
 1) Install dependencies
-  bun install
+```bash
+bun install
+```
+  
 2) Run the dev server
-  bun run dev
+```bash
+bun run dev
+```
 Open http://localhost:3000
-3) Explore pages
+4) Explore pages
 -Homepage: http://localhost:3000/
 -Contact form: http://localhost:3000/contact (submits to /contact/success)
 -Case studies index: http://localhost:3000/projects
@@ -16,8 +21,10 @@ Open http://localhost:3000
   - http://localhost:3000/blog/improving-core-web-vitals
   - http://localhost:3000/blog/typed-forms-with-react-and-zod
 4) Optional: Production build preview
-  bun run build
-  bun run start
+```bash
+bun run build
+bun run start
+```
 Open http://localhost:3000
 View your Netlify site link and plan
 Go to your team: Netlify team projects
