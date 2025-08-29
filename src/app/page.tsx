@@ -21,7 +21,7 @@ export default function Home() {
               <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About</a>
               <a href="#experience" className="text-muted-foreground hover:text-foreground transition-colors">Experience</a>
               <a href="#projects" className="text-muted-foreground hover:text-foreground transition-colors">Projects</a>
-              <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
+              <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</Link>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
               <ThemeToggle />
             </div>

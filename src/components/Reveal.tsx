@@ -10,7 +10,7 @@ type RevealProps = {
 }
 
 export default function Reveal({ children, className, as = "div", delayMs = 0 }: RevealProps) {
-  const Container = as as any
+  const Container: React.ElementType = as
   const ref = useRef<HTMLDivElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
 
