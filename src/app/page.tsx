@@ -5,6 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Github, Linkedin, Mail, MapPin, Download, ExternalLink } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
+import Testimonials from "@/components/Testimonials"
+import Reveal from "@/components/Reveal"
 
 export default function Home() {
   return (
@@ -18,6 +21,7 @@ export default function Home() {
               <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">About</a>
               <a href="#experience" className="text-muted-foreground hover:text-foreground transition-colors">Experience</a>
               <a href="#projects" className="text-muted-foreground hover:text-foreground transition-colors">Projects</a>
+              <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
               <ThemeToggle />
             </div>
@@ -32,7 +36,7 @@ export default function Home() {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 animate-fade-in-up">
+            <Reveal className="space-y-6">
               <div className="space-y-2">
                 <p className="text-muted-foreground text-lg">Hi there! 👋</p>
                 <h1 className="text-4xl md:text-6xl font-bold leading-tight">
@@ -53,10 +57,9 @@ export default function Home() {
                   <Download className="w-4 h-4" />
                   Resume
                 </Button>
-                <Button variant="outline" size="lg" className="gap-2">
-                  <Mail className="w-4 h-4" />
-                  Get in Touch
-                </Button>
+                <Link href="/contact" className="inline-flex items-center gap-2 rounded-md border px-4 py-2 hover:bg-accent transition-colors">
+                  <Mail className="w-4 h-4" /> Get in Touch
+                </Link>
               </div>
               <div className="flex gap-4">
                 <Button variant="ghost" size="sm" className="hover:scale-110 transition-transform">
@@ -69,8 +72,8 @@ export default function Home() {
                   <Mail className="w-5 h-5" />
                 </Button>
               </div>
-            </div>
-            <div className="flex justify-center animate-float">
+            </Reveal>
+            <Reveal className="flex justify-center" delayMs={100}>
               <div className="relative">
                 <div className="w-80 h-80 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
                   <Image
@@ -85,7 +88,7 @@ export default function Home() {
                   <span className="text-white font-bold text-sm">✓</span>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -93,12 +96,13 @@ export default function Home() {
       {/* Skills Section */}
       <section id="about" className="py-20 px-6 bg-muted/50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Skills & Technologies</h2>
             <p className="text-xl text-muted-foreground">Tools and technologies I work with</p>
-          </div>
+          </Reveal>
 
           <div className="grid md:grid-cols-3 gap-8">
+            <Reveal>
             <Card className="card-hover">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Frontend</h3>
@@ -111,7 +115,9 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
 
+            <Reveal delayMs={100}>
             <Card className="card-hover">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Backend</h3>
@@ -124,7 +130,9 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
 
+            <Reveal delayMs={200}>
             <Card className="card-hover">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Tools & Cloud</h3>
@@ -137,6 +145,7 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -144,12 +153,13 @@ export default function Home() {
       {/* Experience Section */}
       <section id="experience" className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Experience</h2>
             <p className="text-xl text-muted-foreground">My professional journey</p>
-          </div>
+          </Reveal>
 
           <div className="space-y-8">
+            <Reveal>
             <Card className="card-hover">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
@@ -174,7 +184,9 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
 
+            <Reveal delayMs={100}>
             <Card className="card-hover">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
@@ -199,6 +211,7 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -206,12 +219,13 @@ export default function Home() {
       {/* Projects Section */}
       <section id="projects" className="py-20 px-6 bg-muted/50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
             <p className="text-xl text-muted-foreground">Some of my recent work</p>
-          </div>
+          </Reveal>
 
           <div className="grid md:grid-cols-2 gap-8">
+            <Reveal>
             <Card className="overflow-hidden group hover:shadow-lg transition-all duration-300 card-hover">
               <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
@@ -232,14 +246,15 @@ export default function Home() {
                     <Github className="w-4 h-4" />
                     Code
                   </Button>
-                  <Button size="sm" className="gap-2">
-                    <ExternalLink className="w-4 h-4" />
-                    Live Demo
-                  </Button>
+                  <Link href="/projects/ecommerce-platform" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
+                    <ExternalLink className="w-4 h-4" /> Case Study
+                  </Link>
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
 
+            <Reveal delayMs={100}>
             <Card className="overflow-hidden group hover:shadow-lg transition-all duration-300 card-hover">
               <div className="aspect-video bg-gradient-to-br from-green-500 to-blue-500 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
@@ -260,13 +275,13 @@ export default function Home() {
                     <Github className="w-4 h-4" />
                     Code
                   </Button>
-                  <Button size="sm" className="gap-2">
-                    <ExternalLink className="w-4 h-4" />
-                    Live Demo
-                  </Button>
+                  <Link href="/projects/task-management-app" className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-xs text-primary-foreground hover:opacity-90 transition">
+                    <ExternalLink className="w-4 h-4" /> Case Study
+                  </Link>
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -274,15 +289,16 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Work Together</h2>
-          <p className="text-xl text-muted-foreground mb-8">
-            Have a project in mind? Let's discuss how we can bring your ideas to life.
-          </p>
+          <Reveal className="space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Work Together</h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Have a project in mind? Let's discuss how we can bring your ideas to life.
+            </p>
+          </Reveal>
           <div className="flex justify-center gap-4">
-            <Button size="lg" className="gap-2">
-              <Mail className="w-4 h-4" />
-              Get in Touch
-            </Button>
+            <Link href="/contact" className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 transition">
+              <Mail className="w-4 h-4" /> Get in Touch
+            </Link>
             <Button variant="outline" size="lg" className="gap-2">
               <Download className="w-4 h-4" />
               Download Resume
@@ -290,6 +306,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* Footer */}
       <footer className="border-t py-8 px-6">
