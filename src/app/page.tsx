@@ -76,7 +76,7 @@ export default function Home() {
               <div className="relative">
                 <div className="w-80 h-80 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
                   <Image
-                    src="https://ext.same-assets.com/2839722144/480519084.jpeg"
+                    src="https://media.discordapp.net/attachments/941923680588546048/1416088973117489152/Gods_Type.jpg?ex=68c59320&is=68c441a0&hm=442d9c257f5a869a111747ad0c63f908b1eeeabaedf3dfecb957d3db2d8576c3&=&format=webp"
                     alt="Profile"
                     width={320}
                     height={320}
