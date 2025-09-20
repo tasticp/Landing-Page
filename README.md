@@ -10,3 +10,4 @@ Cursor AI
 @https://github.com/tasticp/tasticp_/blob/main/About.md 
 
 ## Deployed on Netlify
+<!--cursir test wakaime--> 
