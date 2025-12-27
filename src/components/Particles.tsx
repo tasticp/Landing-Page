@@ -20,10 +20,16 @@ export default function Particles() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
+    // Store canvas dimensions - TypeScript now knows these are non-null
+    let canvasWidth = window.innerWidth
+    let canvasHeight = window.innerHeight
+
     // Set canvas size to match window size
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      canvasWidth = window.innerWidth
+      canvasHeight = window.innerHeight
+      canvas.width = canvasWidth
+      canvas.height = canvasHeight
     }
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
@@ -36,11 +42,16 @@ export default function Particles() {
       speedX: number // Horizontal velocity
       speedY: number // Vertical velocity
       opacity: number // Transparency (0-1)
+      canvasWidth: number // Canvas width reference
+      canvasHeight: number // Canvas height reference
 
-      constructor() {
+      constructor(width: number, height: number) {
+        // Store canvas dimensions
+        this.canvasWidth = width
+        this.canvasHeight = height
         // Initialize particle at random position
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = Math.random() * width
+        this.y = Math.random() * height
         // Random size between 1-3 pixels
         this.size = Math.random() * 2 + 1
         // Random velocity for movement
@@ -50,6 +61,12 @@ export default function Particles() {
         this.opacity = Math.random() * 0.5 + 0.2
       }
 
+      // Update canvas dimensions (called on resize)
+      updateDimensions(width: number, height: number) {
+        this.canvasWidth = width
+        this.canvasHeight = height
+      }
+
       // Update particle position
       update() {
         // Move particle
@@ -57,21 +74,20 @@ export default function Particles() {
         this.y += this.speedY
 
         // Wrap around edges (continuous movement)
-        if (this.x > canvas.width) this.x = 0
-        if (this.x < 0) this.x = canvas.width
-        if (this.y > canvas.height) this.y = 0
-        if (this.y < 0) this.y = canvas.height
+        if (this.x > this.canvasWidth) this.x = 0
+        if (this.x < 0) this.x = this.canvasWidth
+        if (this.y > this.canvasHeight) this.y = 0
+        if (this.y < 0) this.y = this.canvasHeight
       }
 
       // Draw particle on canvas
-      draw() {
-        if (!ctx) return
+      draw(context: CanvasRenderingContext2D) {
         // Set fill color with opacity (purple/blue gradient colors)
-        ctx.fillStyle = `rgba(102, 126, 234, ${this.opacity})`
-        ctx.beginPath()
+        context.fillStyle = `rgba(102, 126, 234, ${this.opacity})`
+        context.beginPath()
         // Draw circle
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        context.fill()
       }
     }
 
@@ -79,18 +95,23 @@ export default function Particles() {
     const particles: Particle[] = []
     const particleCount = 50
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle())
+      particles.push(new Particle(canvasWidth, canvasHeight))
     }
 
     // Animation loop: Continuously updates and redraws particles
     const animate = () => {
+      // Update particle dimensions in case of resize
+      particles.forEach((particle) => {
+        particle.updateDimensions(canvasWidth, canvasHeight)
+      })
+
       // Clear canvas for next frame
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
       // Update and draw each particle
       particles.forEach((particle) => {
         particle.update()
-        particle.draw()
+        particle.draw(ctx)
       })
 
       // Draw connecting lines between nearby particles
