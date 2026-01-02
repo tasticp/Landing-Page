@@ -86,7 +86,12 @@ type CacheEntry<T> = {
 
 const CACHE_TTL_MS = 2 * 60 * 1000; // 2 minutes
 
-function getCacheKey(playlistId: string, maxResults: number, pageToken?: string, includeDetails?: boolean) {
+function getCacheKey(
+  playlistId: string,
+  maxResults: number,
+  pageToken?: string,
+  includeDetails?: boolean,
+) {
   return `yt_playlist::${playlistId}::max=${maxResults}::page=${pageToken ?? "0"}::details=${includeDetails ? "1" : "0"}`;
 }
 
@@ -100,8 +105,10 @@ async function fetchJson(url: string, init?: RequestInit) {
   const res = await fetch(url, init);
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    const err = new Error(`Fetch failed: ${res.status} ${res.statusText} ${text}`);
-    (err as any).status = res.status;
+    const err: Error & { status?: number } = new Error(
+      `Fetch failed: ${res.status} ${res.statusText} ${text}`,
+    );
+    err.status = res.status;
     throw err;
   }
   return res.json();
@@ -111,7 +118,12 @@ async function fetchJson(url: string, init?: RequestInit) {
  * Fetch playlist items (playlistItems.list).
  * We request part=snippet to get title/description/thumbnails/resourceId.
  */
-async function fetchPlaylistItemsFromYouTube(apiKey: string, playlistId: string, maxResults = 10, pageToken?: string) {
+async function fetchPlaylistItemsFromYouTube(
+  apiKey: string,
+  playlistId: string,
+  maxResults = 10,
+  pageToken?: string,
+) {
   const params = new URLSearchParams({
     part: "snippet",
     playlistId,
@@ -129,7 +141,11 @@ async function fetchPlaylistItemsFromYouTube(apiKey: string, playlistId: string,
  * Optionally fetch video details (videos.list) for multiple videoIds.
  * Request contentDetails and statistics if requested.
  */
-async function fetchVideosDetails(apiKey: string, videoIds: string[], parts: string[] = ["contentDetails", "statistics"]) {
+async function fetchVideosDetails(
+  apiKey: string,
+  videoIds: string[],
+  parts: string[] = ["contentDetails", "statistics"],
+) {
   if (!videoIds.length) return { items: [] };
   const params = new URLSearchParams({
     part: parts.join(","),
@@ -147,7 +163,10 @@ export async function GET(req: Request) {
   try {
     const apiKey = getEnv("YOUTUBE_API_KEY");
     if (!apiKey) {
-      return NextResponse.json({ error: "Missing YOUTUBE_API_KEY environment variable." }, { status: 500 });
+      return NextResponse.json(
+        { error: "Missing YOUTUBE_API_KEY environment variable." },
+        { status: 500 },
+      );
     }
 
     const url = new URL(req.url);
@@ -157,23 +176,41 @@ export async function GET(req: Request) {
     const includeDetailsParam = url.searchParams.get("includeDetails");
 
     if (!playlistId) {
-      return NextResponse.json({ error: "Missing required query param: playlistId" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required query param: playlistId" },
+        { status: 400 },
+      );
     }
 
-    const maxResults = maxResultsParam ? Math.min(50, Math.max(1, Number(maxResultsParam))) : 10;
-    const includeDetails = includeDetailsParam === "1" || includeDetailsParam === "true";
+    const maxResults = maxResultsParam
+      ? Math.min(50, Math.max(1, Number(maxResultsParam)))
+      : 10;
+    const includeDetails =
+      includeDetailsParam === "1" || includeDetailsParam === "true";
 
     // Check cache
-    const cacheKey = getCacheKey(playlistId, maxResults, pageToken, includeDetails);
-    const globalObj: any = globalThis as any;
-    const cached: CacheEntry<PlaylistResponsePayload> | undefined = globalObj[cacheKey];
+    const cacheKey = getCacheKey(
+      playlistId,
+      maxResults,
+      pageToken,
+      includeDetails,
+    );
+    const globalObj = globalThis as unknown as Record<string, unknown>;
+    const cached = globalObj[cacheKey] as
+      | CacheEntry<PlaylistResponsePayload>
+      | undefined;
     const now = Date.now();
     if (cached && cached.expiresAt > now) {
       return NextResponse.json(cached.data, { status: 200 });
     }
 
     // Fetch playlist items
-    const raw = await fetchPlaylistItemsFromYouTube(apiKey, playlistId, maxResults, pageToken);
+    const raw = await fetchPlaylistItemsFromYouTube(
+      apiKey,
+      playlistId,
+      maxResults,
+      pageToken,
+    );
 
     // raw.items is an array of playlist items
     const items: PlaylistItem[] = Array.isArray(raw.items) ? raw.items : [];
@@ -187,8 +224,13 @@ export async function GET(req: Request) {
 
     let videoDetailsMap: Map<string, VideoDetails> | null = null;
     if (includeDetails && videoIds.length > 0) {
-      const videosJson = await fetchVideosDetails(apiKey, videoIds, ["contentDetails", "statistics"]);
-      const videoItems: VideoDetails[] = Array.isArray(videosJson.items) ? videosJson.items : [];
+      const videosJson = await fetchVideosDetails(apiKey, videoIds, [
+        "contentDetails",
+        "statistics",
+      ]);
+      const videoItems: VideoDetails[] = Array.isArray(videosJson.items)
+        ? videosJson.items
+        : [];
       videoDetailsMap = new Map(videoItems.map((v) => [v.id, v]));
     }
 
@@ -205,7 +247,11 @@ export async function GET(req: Request) {
         thumbnails: sn?.thumbnails ?? undefined,
         publishedAt: sn?.publishedAt ?? undefined,
         channelTitle: sn?.channelTitle ?? undefined,
-        duration: (details && details.contentDetails && (details.contentDetails.duration ?? null)) || null,
+        duration:
+          (details &&
+            details.contentDetails &&
+            (details.contentDetails.duration ?? null)) ||
+          null,
         statistics: (details && details.statistics) || null,
       };
       return simple;

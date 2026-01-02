@@ -25,6 +25,7 @@
 export type Track = {
   src: string;
   title?: string;
+  filename?: string;
   id?: string;
 };
 

@@ -29,7 +29,7 @@ type TokenCache = {
 };
 
 type PlaylistCacheEntry = {
-  data: any;
+  data: unknown;
   expiresAt: number;
 };
 
@@ -53,12 +53,16 @@ async function getAccessToken(): Promise<string> {
   const clientSecret = getEnv("SPOTIFY_CLIENT_SECRET");
 
   if (!clientId || !clientSecret) {
-    throw new Error("Missing SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET environment variables.");
+    throw new Error(
+      "Missing SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET environment variables.",
+    );
   }
 
   // Store token cache on globalThis so it's reused across Lambda invocations (where possible)
-  const globalObj: any = globalThis as any;
-  let tokenCache: TokenCache | undefined = globalObj[TOKEN_CACHE_KEY];
+  const globalObj = globalThis as unknown as Record<string, unknown>;
+  let tokenCache: TokenCache | undefined = globalObj[TOKEN_CACHE_KEY] as
+    | TokenCache
+    | undefined;
 
   const now = Date.now();
   if (tokenCache && tokenCache.expiresAt > now + 1000) {
@@ -68,7 +72,9 @@ async function getAccessToken(): Promise<string> {
   const tokenUrl = "https://accounts.spotify.com/api/token";
   const body = new URLSearchParams({ grant_type: "client_credentials" });
 
-  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
+  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
+    "base64",
+  );
 
   const res = await fetch(tokenUrl, {
     method: "POST",
@@ -81,7 +87,9 @@ async function getAccessToken(): Promise<string> {
 
   if (!res.ok) {
     const errText = await res.text().catch(() => "");
-    throw new Error(`Spotify token request failed: ${res.status} ${res.statusText} ${errText}`);
+    throw new Error(
+      `Spotify token request failed: ${res.status} ${res.statusText} ${errText}`,
+    );
   }
 
   const json = await res.json();
@@ -115,9 +123,9 @@ async function getPlaylistFromSpotify(
   limit = 50,
   offset = 0,
 ): Promise<any> {
-  const globalObj: any = globalThis as any;
+  const globalObj = globalThis as unknown as Record<string, unknown>;
   const key = playlistCacheKey(playlistId, limit, offset);
-  const cached: PlaylistCacheEntry | undefined = globalObj[key];
+  const cached = globalObj[key] as PlaylistCacheEntry | undefined;
 
   const now = Date.now();
   if (cached && cached.expiresAt > now) {
@@ -136,10 +144,12 @@ async function getPlaylistFromSpotify(
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`Spotify playlist request failed: ${res.status} ${res.statusText} ${text}`);
+    throw new Error(
+      `Spotify playlist request failed: ${res.status} ${res.statusText} ${text}`,
+    );
   }
 
-  const data = await res.json();
+  const data = (await res.json()) as unknown;
 
   // Cache playlist results for a short time (e.g. 2 minutes) to reduce API calls.
   const entry: PlaylistCacheEntry = {
@@ -156,42 +166,102 @@ async function getPlaylistFromSpotify(
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
-    const playlistIdParam = url.searchParams.get("playlistId") || getEnv("SPOTIFY_DEFAULT_PLAYLIST_ID");
+    const playlistIdParam =
+      url.searchParams.get("playlistId") ||
+      getEnv("SPOTIFY_DEFAULT_PLAYLIST_ID");
     const limitParam = url.searchParams.get("limit");
     const offsetParam = url.searchParams.get("offset");
 
     if (!playlistIdParam) {
       return NextResponse.json(
-        { error: "Missing 'playlistId' query param and SPOTIFY_DEFAULT_PLAYLIST_ID is not set." },
+        {
+          error:
+            "Missing 'playlistId' query param and SPOTIFY_DEFAULT_PLAYLIST_ID is not set.",
+        },
         { status: 400 },
       );
     }
 
-    const limit = limitParam ? Math.min(100, Math.max(1, Number(limitParam))) : 50;
+    const limit = limitParam
+      ? Math.min(100, Math.max(1, Number(limitParam)))
+      : 50;
     const offset = offsetParam ? Math.max(0, Number(offsetParam)) : 0;
 
     // Fetch playlist tracks from Spotify
     const raw = await getPlaylistFromSpotify(playlistIdParam, limit, offset);
 
-    // Transform to a lighter-weight payload for the client
-    const simplifiedItems = (raw.items || []).map((item: any) => {
-      const track = item.track || item;
-      return {
-        id: track.id,
-        name: track.name,
-        preview_url: track.preview_url,
-        external_urls: track.external_urls,
-        duration_ms: track.duration_ms,
-        explicit: track.explicit,
-        artists: (track.artists || []).map((a: any) => ({ id: a.id, name: a.name, external_urls: a.external_urls })),
-        album: track.album
+    // Transform to a lighter-weight payload for the client (use safe guards for unknown shapes)
+    const itemsArray = Array.isArray((raw as { items?: unknown })?.items)
+      ? (raw as { items: unknown[] }).items
+      : [];
+    const simplifiedItems = itemsArray.map((item) => {
+      // Some playlist entries come wrapped as { track: {...} } — handle both shapes
+      const trackObj =
+        item &&
+        typeof item === "object" &&
+        "track" in (item as Record<string, unknown>)
+          ? (item as Record<string, unknown>)["track"]
+          : item;
+      const track =
+        trackObj && typeof trackObj === "object"
+          ? (trackObj as Record<string, unknown>)
+          : {};
+
+      const getString = (k: string) =>
+        track[k] && typeof track[k] === "string"
+          ? (track[k] as string)
+          : undefined;
+      const getNumber = (k: string) =>
+        track[k] && typeof track[k] === "number"
+          ? (track[k] as number)
+          : undefined;
+
+      const artists = Array.isArray(track["artists"])
+        ? (track["artists"] as Record<string, unknown>[]).map((a) => ({
+            id: typeof a?.["id"] === "string" ? (a["id"] as string) : undefined,
+            name:
+              typeof a?.["name"] === "string"
+                ? (a["name"] as string)
+                : undefined,
+            external_urls: a?.["external_urls"],
+          }))
+        : [];
+
+      const albumVal = track["album"];
+      const album =
+        albumVal && typeof albumVal === "object"
           ? {
-              id: track.album.id,
-              name: track.album.name,
-              images: track.album.images,
-              external_urls: track.album.external_urls,
+              id:
+                typeof (albumVal as Record<string, unknown>)["id"] === "string"
+                  ? ((albumVal as Record<string, unknown>)["id"] as string)
+                  : undefined,
+              name:
+                typeof (albumVal as Record<string, unknown>)["name"] ===
+                "string"
+                  ? ((albumVal as Record<string, unknown>)["name"] as string)
+                  : undefined,
+              images: (albumVal as Record<string, unknown>)["images"],
+              external_urls: (albumVal as Record<string, unknown>)[
+                "external_urls"
+              ],
             }
-          : null,
+          : null;
+
+      return {
+        id: getString("id"),
+        name: getString("name"),
+        preview_url:
+          typeof track["preview_url"] === "string"
+            ? (track["preview_url"] as string)
+            : null,
+        external_urls: track["external_urls"],
+        duration_ms: getNumber("duration_ms"),
+        explicit:
+          typeof track["explicit"] === "boolean"
+            ? (track["explicit"] as boolean)
+            : undefined,
+        artists,
+        album,
       };
     });
 
@@ -199,15 +269,46 @@ export async function GET(req: Request) {
       playlistId: playlistIdParam,
       limit,
       offset,
-      total: raw.total ?? raw.paging?.total ?? null,
+      total: (() => {
+        if (raw && typeof raw === "object") {
+          const r = raw as Record<string, unknown>;
+          if ("total" in r && typeof r["total"] === "number")
+            return r["total"] as number;
+          const paging = r["paging"];
+          if (
+            paging &&
+            typeof paging === "object" &&
+            "total" in (paging as Record<string, unknown>) &&
+            typeof (paging as Record<string, unknown>)["total"] === "number"
+          ) {
+            return (paging as Record<string, unknown>)["total"] as number;
+          }
+        }
+        return null;
+      })(),
       items: simplifiedItems,
     };
 
     return NextResponse.json(responsePayload, { status: 200 });
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Don't leak sensitive info — return friendly errors but log details server-side
-    console.error("[/api/spotify] error:", err && err.stack ? err.stack : err);
-    const message = err?.message || "Unknown server error";
+    // Safely extract stack or message where available
+    const stackOrErr =
+      err &&
+      typeof err === "object" &&
+      "stack" in (err as Record<string, unknown>)
+        ? (err as Record<string, unknown>)["stack"]
+        : err;
+    console.error("[/api/spotify] error:", stackOrErr);
+    const message =
+      typeof err === "string"
+        ? err
+        : err &&
+            typeof err === "object" &&
+            "message" in (err as Record<string, unknown>) &&
+            typeof (err as Record<string, unknown>)["message"] === "string"
+          ? ((err as Record<string, unknown>)["message"] as string)
+          : "Unknown server error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

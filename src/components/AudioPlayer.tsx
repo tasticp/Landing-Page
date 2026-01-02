@@ -55,13 +55,25 @@ export default function AudioPlayer({
             const existingSrcs = new Set(
               audioManager.getPlaylist().map((t) => t.src),
             );
-            const arr = data as unknown as Track[];
+            const arr = Array.isArray(data) ? (data as unknown as Track[]) : [];
             for (const t of arr) {
-              const src =
-                (t?.src ?? (t as any)?.filename)
-                  ? `/audio/${(t as any).filename}`
+              // Guard against unexpected shapes coming from playlist.json
+              const filename =
+                t && typeof (t as Track).filename === "string"
+                  ? (t as Track).filename
                   : undefined;
-              const title = t?.title ?? (t as any)?.filename ?? undefined;
+              const src =
+                t && typeof (t as Track).src === "string"
+                  ? (t as Track).src
+                  : filename
+                    ? `/audio/${filename}`
+                    : undefined;
+              const title =
+                t && typeof (t as Track).title === "string"
+                  ? (t as Track).title
+                  : filename
+                    ? filename
+                    : undefined;
               if (src && !existingSrcs.has(src)) {
                 audioManager.addTrack(src, title);
               }

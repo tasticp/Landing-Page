@@ -70,11 +70,15 @@ export default function ExternalPlaylists({
 }) {
   const [spotifyLoading, setSpotifyLoading] = useState(false);
   const [spotifyError, setSpotifyError] = useState<string | null>(null);
-  const [spotifyPlaylist, setSpotifyPlaylist] = useState<SpotifyPayload | null>(null);
+  const [spotifyPlaylist, setSpotifyPlaylist] = useState<SpotifyPayload | null>(
+    null,
+  );
 
   const [youtubeLoading, setYoutubeLoading] = useState(false);
   const [youtubeError, setYoutubeError] = useState<string | null>(null);
-  const [youtubePlaylist, setYoutubePlaylist] = useState<YouTubePayload | null>(null);
+  const [youtubePlaylist, setYoutubePlaylist] = useState<YouTubePayload | null>(
+    null,
+  );
 
   const [lastSyncMessage, setLastSyncMessage] = useState<string | null>(null);
 
@@ -117,15 +121,23 @@ export default function ExternalPlaylists({
     setSpotifyError(null);
     setSpotifyPlaylist(null);
     try {
-      const res = await fetch(`/api/spotify?playlistId=${encodeURIComponent(playlistId)}&limit=50`);
+      const res = await fetch(
+        `/api/spotify?playlistId=${encodeURIComponent(playlistId)}&limit=50`,
+      );
       if (!res.ok) {
         const text = await res.text();
         throw new Error(text || `Spotify API returned ${res.status}`);
       }
       const json = (await res.json()) as SpotifyPayload;
       setSpotifyPlaylist(json);
-    } catch (err: any) {
-      setSpotifyError(err?.message || String(err));
+    } catch (err: unknown) {
+      const msg =
+        typeof err === "string"
+          ? err
+          : err instanceof Error
+            ? err.message
+            : String(err);
+      setSpotifyError(msg);
     } finally {
       setSpotifyLoading(false);
     }
@@ -137,15 +149,23 @@ export default function ExternalPlaylists({
     setYoutubeError(null);
     setYoutubePlaylist(null);
     try {
-      const res = await fetch(`/api/youtube?playlistId=${encodeURIComponent(playlistId)}&maxResults=50&includeDetails=1`);
+      const res = await fetch(
+        `/api/youtube?playlistId=${encodeURIComponent(playlistId)}&maxResults=50&includeDetails=1`,
+      );
       if (!res.ok) {
         const text = await res.text();
         throw new Error(text || `YouTube API returned ${res.status}`);
       }
       const json = (await res.json()) as YouTubePayload;
       setYoutubePlaylist(json);
-    } catch (err: any) {
-      setYoutubeError(err?.message || String(err));
+    } catch (err: unknown) {
+      const msg =
+        typeof err === "string"
+          ? err
+          : err instanceof Error
+            ? err.message
+            : String(err);
+      setYoutubeError(msg);
     } finally {
       setYoutubeLoading(false);
     }
@@ -177,7 +197,9 @@ export default function ExternalPlaylists({
       }
     }
 
-    setLastSyncMessage(`Spotify sync complete: ${added} added, ${skipped} skipped.`);
+    setLastSyncMessage(
+      `Spotify sync complete: ${added} added, ${skipped} skipped.`,
+    );
     // notify (audioManager emits playlistchange which other components subscribe to)
   }
 
@@ -225,41 +247,69 @@ export default function ExternalPlaylists({
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="font-semibold">Spotify Playlist</h3>
-              <p className="text-sm text-muted-foreground">Sync preview clips into the site audio player.</p>
+              <p className="text-sm text-muted-foreground">
+                Sync preview clips into the site audio player.
+              </p>
             </div>
             <div className="text-right text-xs text-muted-foreground">
               <div className="mb-1">Source</div>
-              <a href={spotifyUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+              <a
+                href={spotifyUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-500 hover:underline"
+              >
                 Open in Spotify
               </a>
             </div>
           </div>
 
           {spotifyLoading ? (
-            <div className="text-sm text-muted-foreground">Loading Spotify playlist…</div>
+            <div className="text-sm text-muted-foreground">
+              Loading Spotify playlist…
+            </div>
           ) : spotifyError ? (
-            <div className="text-sm text-destructive">Error: {spotifyError}</div>
+            <div className="text-sm text-destructive">
+              Error: {spotifyError}
+            </div>
           ) : spotifyPlaylist ? (
             <div>
               <div className="mb-3">
                 <div className="text-sm text-muted-foreground mb-1">
-                  Playlist ID: <span className="font-mono text-xs">{spotifyPlaylist.playlistId}</span>
+                  Playlist ID:{" "}
+                  <span className="font-mono text-xs">
+                    {spotifyPlaylist.playlistId}
+                  </span>
                 </div>
-                <div className="text-sm">Tracks: {spotifyPlaylist.items.length}{spotifyPlaylist.total ? ` (total ${spotifyPlaylist.total})` : ""}</div>
+                <div className="text-sm">
+                  Tracks: {spotifyPlaylist.items.length}
+                  {spotifyPlaylist.total
+                    ? ` (total ${spotifyPlaylist.total})`
+                    : ""}
+                </div>
               </div>
 
               <div className="space-y-2 max-h-48 overflow-auto mb-3">
                 {spotifyPlaylist.items.map((item) => (
-                  <div key={item.id} className="flex items-center justify-between p-2 rounded hover:bg-accent/5">
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between p-2 rounded hover:bg-accent/5"
+                  >
                     <div className="flex-1">
                       <div className="font-medium">{item.name}</div>
-                      <div className="text-xs text-muted-foreground">{(item.artists || []).map((a) => a.name).join(", ")}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {(item.artists || []).map((a) => a.name).join(", ")}
+                      </div>
                     </div>
                     <div className="ml-3 text-xs">
                       {item.preview_url ? (
-                        <span className="text-green-500">Preview available</span>
+                        <span className="text-green-500">
+                          Preview available
+                        </span>
                       ) : (
-                        <span className="text-muted-foreground">No preview</span>
+                        <span className="text-muted-foreground">
+                          No preview
+                        </span>
                       )}
                     </div>
                   </div>
@@ -279,7 +329,11 @@ export default function ExternalPlaylists({
                   onClick={() => {
                     // open the playlist in Spotify web as another affordance
                     const id = spotifyPlaylist.playlistId;
-                    if (id) window.open(`https://open.spotify.com/playlist/${encodeURIComponent(id)}`, "_blank");
+                    if (id)
+                      window.open(
+                        `https://open.spotify.com/playlist/${encodeURIComponent(id)}`,
+                        "_blank",
+                      );
                   }}
                   type="button"
                 >
@@ -288,7 +342,9 @@ export default function ExternalPlaylists({
               </div>
             </div>
           ) : (
-            <div className="text-sm text-muted-foreground">No playlist data found.</div>
+            <div className="text-sm text-muted-foreground">
+              No playlist data found.
+            </div>
           )}
         </div>
 
@@ -297,41 +353,76 @@ export default function ExternalPlaylists({
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="font-semibold">YouTube Playlist</h3>
-              <p className="text-sm text-muted-foreground">View items — embed or open videos. Direct audio streaming is restricted by YouTube.</p>
+              <p className="text-sm text-muted-foreground">
+                View items — embed or open videos. Direct audio streaming is
+                restricted by YouTube.
+              </p>
             </div>
             <div className="text-right text-xs text-muted-foreground">
               <div className="mb-1">Source</div>
-              <a href={youtubeUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+              <a
+                href={youtubeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-500 hover:underline"
+              >
                 Open in YouTube Music
               </a>
             </div>
           </div>
 
           {youtubeLoading ? (
-            <div className="text-sm text-muted-foreground">Loading YouTube playlist…</div>
+            <div className="text-sm text-muted-foreground">
+              Loading YouTube playlist…
+            </div>
           ) : youtubeError ? (
-            <div className="text-sm text-destructive">Error: {youtubeError}</div>
+            <div className="text-sm text-destructive">
+              Error: {youtubeError}
+            </div>
           ) : youtubePlaylist ? (
             <div>
               <div className="mb-3">
                 <div className="text-sm text-muted-foreground mb-1">
-                  Playlist ID: <span className="font-mono text-xs">{youtubePlaylist.playlistId}</span>
+                  Playlist ID:{" "}
+                  <span className="font-mono text-xs">
+                    {youtubePlaylist.playlistId}
+                  </span>
                 </div>
-                <div className="text-sm">Items: {youtubePlaylist.items.length}</div>
+                <div className="text-sm">
+                  Items: {youtubePlaylist.items.length}
+                </div>
               </div>
 
               <div className="space-y-2 max-h-48 overflow-auto mb-3">
                 {youtubePlaylist.items.map((item, idx) => {
                   const vid = item.videoId;
-                  const watchUrl = vid ? `https://www.youtube.com/watch?v=${vid}` : "#";
-                  const thumb = item.thumbnails ? (item.thumbnails["default"]?.url || Object.values(item.thumbnails)[0]?.url) : null;
+                  const watchUrl = vid
+                    ? `https://www.youtube.com/watch?v=${vid}`
+                    : "#";
+                  const thumb = item.thumbnails
+                    ? item.thumbnails["default"]?.url ||
+                      Object.values(item.thumbnails)[0]?.url
+                    : null;
                   return (
-                    <div key={item.playlistItemId ?? idx} className="flex items-center justify-between p-2 rounded hover:bg-accent/5">
+                    <div
+                      key={item.playlistItemId ?? idx}
+                      className="flex items-center justify-between p-2 rounded hover:bg-accent/5"
+                    >
                       <div className="flex items-center gap-3">
-                        {thumb ? <img src={thumb} alt="" className="w-12 h-8 rounded object-cover" /> : <div className="w-12 h-8 bg-muted rounded" />}
+                        {thumb ? (
+                          <img
+                            src={thumb}
+                            alt=""
+                            className="w-12 h-8 rounded object-cover"
+                          />
+                        ) : (
+                          <div className="w-12 h-8 bg-muted rounded" />
+                        )}
                         <div>
                           <div className="font-medium">{item.title}</div>
-                          <div className="text-xs text-muted-foreground">{item.channelTitle || ""}</div>
+                          <div className="text-xs text-muted-foreground">
+                            {item.channelTitle || ""}
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -366,7 +457,11 @@ export default function ExternalPlaylists({
                   onClick={() => {
                     // open the playlist in YouTube Music
                     const id = youtubePlaylist.playlistId;
-                    if (id) window.open(`https://music.youtube.com/playlist?list=${encodeURIComponent(id)}`, "_blank");
+                    if (id)
+                      window.open(
+                        `https://music.youtube.com/playlist?list=${encodeURIComponent(id)}`,
+                        "_blank",
+                      );
                   }}
                   type="button"
                 >
@@ -383,14 +478,18 @@ export default function ExternalPlaylists({
               </div>
             </div>
           ) : (
-            <div className="text-sm text-muted-foreground">No playlist data found.</div>
+            <div className="text-sm text-muted-foreground">
+              No playlist data found.
+            </div>
           )}
         </div>
       </div>
 
       {/* Global message area */}
       <div className="mt-4 text-sm">
-        {lastSyncMessage ? <div className="text-green-500">{lastSyncMessage}</div> : null}
+        {lastSyncMessage ? (
+          <div className="text-green-500">{lastSyncMessage}</div>
+        ) : null}
       </div>
     </section>
   );
