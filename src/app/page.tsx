@@ -103,102 +103,142 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills Section with Parting Clouds */}
-      <PartingClouds>
-        <section id="about" className="py-20 px-6 bg-muted/50 relative z-10">
-          <div className="max-w-7xl mx-auto">
-            <Reveal className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Skills & Expertise
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Technologies and tools I work with
-              </p>
+      {/* About Section with Fun Animations */}
+      <section id="about" className="py-20 px-6 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <Reveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              What I Do 🚀
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              I craft interactive experiences and build things that actually
+              work. From games to web apps, I love experimenting with code and
+              pushing the boundaries of what's possible online.
+            </p>
+          </Reveal>
+
+          {/* Fun animated cards */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Card 1 */}
+            <Reveal>
+              <div className="group relative bg-gradient-to-br from-background to-muted p-8 rounded-2xl border border-border/40 hover:border-border/80 transition-all duration-300 hover:shadow-xl hover:shadow-foreground/10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    💻
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">Creative Coder</h3>
+                  <p className="text-muted-foreground">
+                    JavaScript, TypeScript, Python, Rust - whatever the
+                    challenge calls for. I build scalable systems and beautiful
+                    interfaces.
+                  </p>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      React
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Next.js
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Web APIs
+                    </span>
+                  </div>
+                </div>
+              </div>
             </Reveal>
 
-            {/* Skill cards grid */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Frontend */}
-              <Reveal>
-                <Card className="card-hover group hover:shadow-xl transition-all duration-300 gradient-border">
-                  <CardContent className="p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">F</span>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold">Frontend</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Web interfaces
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">React</Badge>
-                      <Badge variant="secondary">Next.js</Badge>
-                      <Badge variant="secondary">TypeScript</Badge>
-                      <Badge variant="secondary">Tailwind CSS</Badge>
-                      <Badge variant="secondary">JavaScript</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Reveal>
+            {/* Card 2 */}
+            <Reveal delayMs={100}>
+              <div className="group relative bg-gradient-to-br from-background to-muted p-8 rounded-2xl border border-border/40 hover:border-border/80 transition-all duration-300 hover:shadow-xl hover:shadow-foreground/10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    🎮
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">Game Developer</h3>
+                  <p className="text-muted-foreground">
+                    Procedural generation, roguelikes, browser games - I love
+                    creating interactive worlds and game mechanics that engage
+                    players.
+                  </p>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Game Loops
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Procedural Gen
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Game Design
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
 
-              {/* Backend & Systems */}
-              <Reveal delayMs={100}>
-                <Card className="card-hover group hover:shadow-xl transition-all duration-300 gradient-border">
-                  <CardContent className="p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">B</span>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold">Systems</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Languages & tools
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">Python</Badge>
-                      <Badge variant="secondary">Rust</Badge>
-                      <Badge variant="secondary">C++</Badge>
-                      <Badge variant="secondary">C</Badge>
-                      <Badge variant="secondary">Node.js</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Reveal>
+            {/* Card 3 */}
+            <Reveal delayMs={200}>
+              <div className="group relative bg-gradient-to-br from-background to-muted p-8 rounded-2xl border border-border/40 hover:border-border/80 transition-all duration-300 hover:shadow-xl hover:shadow-foreground/10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    ✨
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">
+                    Animation Enthusiast
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Smooth transitions, parallax effects, interactive elements -
+                    I believe great UX is about making every interaction feel
+                    alive and responsive.
+                  </p>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Framer Motion
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      CSS Animations
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      UX Polish
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
 
-              {/* Creative & Interests */}
-              <Reveal delayMs={200}>
-                <Card className="card-hover group hover:shadow-xl transition-all duration-300 gradient-border">
-                  <CardContent className="p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">✨</span>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold">Interests</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Hobbies & passions
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">Game Dev</Badge>
-                      <Badge variant="secondary">Art</Badge>
-                      <Badge variant="secondary">Music</Badge>
-                      <Badge variant="secondary">Storytelling</Badge>
-                      <Badge variant="secondary">Creative Coding</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            </div>
+            {/* Card 4 */}
+            <Reveal delayMs={300}>
+              <div className="group relative bg-gradient-to-br from-background to-muted p-8 rounded-2xl border border-border/40 hover:border-border/80 transition-all duration-300 hover:shadow-xl hover:shadow-foreground/10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    🔧
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">Tinkerer</h3>
+                  <p className="text-muted-foreground">
+                    Always exploring new tools, libraries, and technologies.
+                    From robotics to browser APIs, I'm curious about how things
+                    work under the hood.
+                  </p>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Experimental
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Systems
+                    </span>
+                    <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm hover:bg-foreground/20 transition-colors">
+                      Learning
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </section>
-      </PartingClouds>
+        </div>
+      </section>
 
       {/* Experience Section */}
       <section id="experience" className="py-20 px-6 relative z-10">

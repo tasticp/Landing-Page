@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { Menu, X, Moon, Sun } from "lucide-react";
@@ -10,6 +9,7 @@ export default function ModernNav() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -33,14 +33,34 @@ export default function ModernNav() {
     setIsOpen(false);
   };
 
+  const handleThemeToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const handleMenuToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.open("https://tasticp.carrd.co/", "_blank");
+  };
+
   return (
-    <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-gradient-to-b from-background via-background/95 to-background/80 border-b border-border/20 shadow-sm">
+    <nav
+      ref={navRef}
+      className="fixed top-0 w-full z-50 backdrop-blur-xl bg-gradient-to-b from-background via-background/95 to-background/80 border-b border-border/20 shadow-sm pointer-events-auto"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a
-            href="https://tasticp.carrd.co/"
-            className="flex items-center gap-3 group"
+          <button
+            onClick={handleLogoClick}
+            className="flex items-center gap-3 group cursor-pointer hover:opacity-80 transition-opacity"
           >
             <div className="w-10 h-10 rounded-xl bg-foreground flex items-center justify-center font-bold text-background text-sm group-hover:scale-110 transition-transform duration-300 shadow-lg">
               T_
@@ -48,10 +68,10 @@ export default function ModernNav() {
             <span className="hidden sm:inline font-black text-lg text-foreground">
               tasticp
             </span>
-          </a>
+          </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2 pointer-events-auto">
             <NavLink href="#about">About</NavLink>
             <NavLink href="#experience">Experience</NavLink>
             <NavLink href="#projects">Projects</NavLink>
@@ -60,13 +80,13 @@ export default function ModernNav() {
             <div className="w-px h-6 bg-gradient-to-b from-transparent via-border/40 to-transparent mx-2"></div>
 
             {/* Social Links & Theme */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 pointer-events-auto">
               {/* GitHub */}
               <a
                 href="https://github.com/tasticp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-lg text-foreground/60 hover:text-foreground hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 group"
+                className="p-2.5 rounded-lg text-foreground/60 hover:text-foreground hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 group cursor-pointer pointer-events-auto"
                 title="GitHub"
               >
                 <svg
@@ -83,7 +103,7 @@ export default function ModernNav() {
                 href="https://www.linkedin.com/in/kelvin-cheong-tasticp/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-lg text-foreground/60 hover:text-foreground hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 group"
+                className="p-2.5 rounded-lg text-foreground/60 hover:text-foreground hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 group cursor-pointer pointer-events-auto"
                 title="LinkedIn"
               >
                 <svg
@@ -98,7 +118,7 @@ export default function ModernNav() {
               {/* Email */}
               <a
                 href="mailto:ricksue99@gmail.com"
-                className="p-2.5 rounded-lg text-foreground/60 hover:text-foreground hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 group"
+                className="p-2.5 rounded-lg text-foreground/60 hover:text-foreground hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 group cursor-pointer pointer-events-auto"
                 title="Email"
               >
                 <svg
@@ -121,7 +141,7 @@ export default function ModernNav() {
                 href="/resume/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white hover:from-blue-700 hover:to-purple-700 dark:hover:from-blue-400 dark:hover:to-purple-400 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 dark:hover:shadow-purple-500/40"
+                className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white hover:from-blue-700 hover:to-purple-700 dark:hover:from-blue-400 dark:hover:to-purple-400 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 dark:hover:shadow-purple-500/40 cursor-pointer pointer-events-auto"
               >
                 CV
               </a>
@@ -129,13 +149,14 @@ export default function ModernNav() {
               {/* Theme Toggle */}
               {mounted && (
                 <button
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="ml-2 p-2.5 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 hover:border-accent/60 transition-all duration-300 group"
+                  onClick={handleThemeToggle}
+                  className="ml-2 p-2.5 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 hover:border-accent/60 transition-all duration-300 group cursor-pointer pointer-events-auto"
                   aria-label={
                     theme === "dark"
                       ? "Switch to light mode"
                       : "Switch to dark mode"
                   }
+                  type="button"
                 >
                   {theme === "dark" ? (
                     <Sun className="w-5 h-5 text-foreground transition-all duration-500" />
@@ -148,12 +169,13 @@ export default function ModernNav() {
           </div>
 
           {/* Mobile Menu */}
-          <div className="md:hidden flex items-center gap-2">
+          <div className="md:hidden flex items-center gap-2 pointer-events-auto">
             {mounted && (
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 transition-all"
+                onClick={handleThemeToggle}
+                className="p-2 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 transition-all cursor-pointer pointer-events-auto"
                 aria-label="Toggle theme"
+                type="button"
               >
                 {theme === "dark" ? (
                   <Sun className="w-5 h-5 text-foreground" />
@@ -164,9 +186,10 @@ export default function ModernNav() {
             )}
 
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg hover:bg-accent/20 transition-colors"
+              onClick={handleMenuToggle}
+              className="p-2 rounded-lg hover:bg-accent/20 transition-colors cursor-pointer pointer-events-auto"
               aria-label="Toggle menu"
+              type="button"
             >
               {isOpen ? (
                 <X className="w-6 h-6" />
@@ -181,9 +204,9 @@ export default function ModernNav() {
         {isOpen && (
           <div
             ref={menuRef}
-            className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/20 animate-in fade-in slide-in-from-top-2 duration-300 z-40"
+            className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/20 animate-in fade-in slide-in-from-top-2 duration-300 z-40 pointer-events-auto"
           >
-            <div className="px-4 py-4 space-y-3">
+            <div className="px-4 py-4 space-y-3 pointer-events-auto">
               <MobileNavLink href="#about" onClick={handleNavClick}>
                 About
               </MobileNavLink>
@@ -194,12 +217,12 @@ export default function ModernNav() {
                 Projects
               </MobileNavLink>
 
-              <div className="pt-3 border-t border-border/20 space-y-3">
+              <div className="pt-3 border-t border-border/20 space-y-3 pointer-events-auto">
                 <a
                   href="https://github.com/tasticp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors cursor-pointer"
+                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors cursor-pointer pointer-events-auto"
                   onClick={handleNavClick}
                 >
                   GitHub
@@ -208,7 +231,7 @@ export default function ModernNav() {
                   href="https://www.linkedin.com/in/kelvin-cheong-tasticp/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors cursor-pointer"
+                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors cursor-pointer pointer-events-auto"
                   onClick={handleNavClick}
                 >
                   LinkedIn
@@ -217,7 +240,7 @@ export default function ModernNav() {
                   href="/resume/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center font-medium text-sm cursor-pointer"
+                  className="block px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center font-medium text-sm cursor-pointer pointer-events-auto"
                   onClick={handleNavClick}
                 >
                   Download CV
@@ -241,7 +264,7 @@ function NavLink({
   return (
     <a
       href={href}
-      className="px-3 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-accent/15 transition-all duration-300 relative group"
+      className="px-3 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-accent/15 transition-all duration-300 relative group cursor-pointer pointer-events-auto"
     >
       {children}
       <span className="absolute bottom-1 left-3 right-3 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -262,7 +285,7 @@ function MobileNavLink({
     <a
       href={href}
       onClick={onClick}
-      className="block px-4 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-accent/15 transition-all duration-300"
+      className="block px-4 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-accent/15 transition-all duration-300 cursor-pointer pointer-events-auto"
     >
       {children}
     </a>
