@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Colors Reference - Tasticp Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            padding: 2rem;
+            background: #f5f5f5;
+            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .toggle-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #667eea;
+            background: transparent;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .toggle-btn {
+            border-color: #d8b4fe;
+            color: #d8b4fe;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.05);
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        body.dark-mode .section h2 {
+            color: #f8fafc;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .color-card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-swatch {
+            height: 150px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-info {
+            padding: 1rem;
+            background: white;
+        }
+
+        body.dark-mode .color-info {
+            background: #1e293b;
+        }
+
+        .color-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-value {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+            word-break: break-all;
+        }
+
+        body.dark-mode .color-value {
+            color: #9ca3af;
+        }
+
+        .color-mode {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+        }
+
+        body.dark-mode .color-mode {
+            color: #6b7280;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .mode-preview {
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-preview {
+            background: #fafaf9;
+            color: #1f2937;
+        }
+
+        .dark-preview {
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        .preview-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .light-preview .preview-card {
+            background: white;
+            border-color: #e0e7ff;
+        }
+
+        .dark-preview .preview-card {
+            background: #1e293b;
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .gradient-demo {
+            height: 100px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-demo {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 1px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        body.dark-mode .btn-secondary {
+            background: rgba(216, 180, 254, 0.1);
+            color: #d8b4fe;
+            border-color: #d8b4fe;
+        }
+
+        body.dark-mode .btn-secondary:hover {
+            background: rgba(216, 180, 254, 0.2);
+        }
+
+        .animation-demo {
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            animation: float 3s ease-in-out infinite;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .specs-table th {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .specs-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        body.dark-mode .specs-table th {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .specs-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        body.dark-mode .code-block {
+            background: #0f172a;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(102, 126, 234, 0.2);
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .footer {
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .color-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>🎨 Theme Colors Reference</h1>
+                <p style="color: #666; margin-top: 0.5rem;">Tasticp Landing Page - Color System & Design Tokens</p>
+            </div>
+            <button class="toggle-btn" onclick="toggleDarkMode()">🌙</div> Toggle Dark</button>
+        </div>
+
+        <!-- Light Mode Colors -->
+        <div class="section">
+            <h2>Light Mode Palette</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #FAFAF9;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Background</div>
+                        <div class="color-value">#FAFAF9</div>
+                        <div class="color-value">hsl(0 0% 99%)</div>
+                        <div class="color-mode">Light</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #1F2937; color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Foreground</div>
+                        <div class="color-value">#1F2937</div>
+                        <div class="color-value">hsl(217 33% 17%)</div>
+                        <div class="color-mode">Light</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #A855F7; color: white;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary</div>
+                        <div class="color-value">#A855F7</div>
+                        <div class="color-value">hsl(263 70% 50%)</div>
+                        <div class="color-mode">Light</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #F3E8FF; color: #1F2937;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary</div>
+                        <div class="color-value">#F3E8FF</div>
+                        <div class="color-value">hsl(263 70% 95%)</div>
+                        <div class="color-mode">Light</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #9333EA; color: white;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent</div>
+                        <div class="color-value">#9333EA</div>
+                        <div class="color-value">hsl(263 80% 55%)</div>
+                        <div class="color-mode">Light</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #E5E7EB; color: #1F2937;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Border</div>
+                        <div class="color-value">#E5E7EB</div>
+                        <div class="color-value">hsl(217 32% 88%)</div>
+                        <div class="color-mode">Light</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dark Mode Colors -->
+        <div class="section">
+            <h2>Dark Mode Palette</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #0F172A; color: white;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Background</div>
+                        <div class="color-value">#0F172A</div>
+                        <div class="color-value">hsl(217 32% 8%)</div>
+                        <div class="color-mode">Dark</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #1E293B; color: white;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Card</div>
+                        <div class="color-value">#1E293B</div>
+                        <div class="color-value">hsl(217 32% 13%)</div>
+                        <div class="color-mode">Dark</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #D8B4FE; color: #0F172A;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary</div>
+                        <div class="color-value">#D8B4FE</div>
+                        <div class="color-value">hsl(263 80% 65%)</div>
+                        <div class="color-mode">Dark</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #334155; color: white;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary</div>
+                        <div class="color-value">#334155</div>
+                        <div class="color-value">hsl(217 32% 22%)</div>
+                        <div class="color-mode">Dark</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #60A5FA; color: #0F172A;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent</div>
+                        <div class="color-value">#60A5FA</div>
+                        <div class="color-value">hsl(200 100% 60%)</div>
+                        <div class="color-mode">Dark</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #475569; color: white;">—</div>
+                    <div class="color-info">
+                        <div class="color-name">Border</div>
+                        <div class="color-value">#475569</div>
+                        <div class="color-value">hsl(217 32% 20%)</div>
+                        <div class="color-mode">Dark</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gradients -->
+        <div class="section">
+            <h2>Brand Gradients</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Primary Gradient</h3>
+                    <div class="gradient-demo" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);">
+                        Blue → Purple → Pink
+                    </div>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Purple Gradient</h3>
+                    <div class="gradient-demo" style="background: linear-gradient(135deg, #A855F7 0%, #9333EA 100%);">
+                        Light → Dark Purple
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="section">
+            <h2>Theme Preview</h2>
+            <div class="comparison-grid">
+                <div class="mode-preview light-preview">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Light Mode</h3>
+                    <div class="preview-card">
+                        <h4 style="margin-bottom: 0.5rem;">Card Title</h4>
+                        <p style="color: #666; margin-bottom: 1rem;">This is how content looks in light mode with proper contrast.</p>
+                        <button class="button-demo btn-primary">Primary Button</button>
+                        <button class="button-demo btn-secondary">Secondary</button>
+                    </div>
+                    <div class="gradient-demo" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);">
+                        Gradient Text
+                    </div>
+                </div>
+
+                <div class="mode-preview dark-preview">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Dark Mode</h3>
+                    <div class="preview-card">
+                        <h4 style="margin-bottom: 0.5rem;">Card Title</h4>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem;">This is how content looks in dark mode, easy on the eyes.</p>
+                        <button class="button-demo btn-primary">Primary Button</button>
+                        <button class="button-demo btn-secondary">Secondary</button>
+                    </div>
+                    <div class="gradient-demo" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);">
+                        Gradient Text
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animations -->
+        <div class="section">
+            <h2>Animation Examples</h2>
+            <div class="animation-demo">
+                ✨ Float Animation (3s ease-in-out infinite)
+            </div>
+            <div style="padding: 2rem; border-radius: 8px; background: rgba(102, 126, 234, 0.1); color: #667eea; text-align: center; font-weight: 600; animation: pulse 2s ease-in-out infinite;">
+                📈 Pulse Animation (2s ease-in-out infinite)
+            </div>
+
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.8; }
+            }
+        </div>
+
+        <!-- Specifications -->
+        <div class="section">
+            <h2>Design Specifications</h2>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Border Radius</strong></td>
+                        <td>8px (0.5rem)</td>
+                        <td>Default corner radius for all components</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transition</strong></td>
+                        <td>0.3s cubic-bezier(0.4, 0, 0.2, 1)</td>
+                        <td>Standard smooth easing function</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Theme Transition</strong></td>
+                        <td>0.5s cubic-bezier(0.4, 0, 0.2, 1)</td>
+                        <td>Smoother transition when toggling theme</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shadow (Light)</strong></td>
+                        <td>0 4px 6px rgba(0,0,0,0.1)</td>
+                        <td>Subtle elevation for light mode</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shadow (Dark)</strong></td>
+                        <td>0 4px 6px rgba(0,0,0,0.3)</td>
+                        <td>Stronger elevation for dark mode</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backdrop Filter</strong></td>
+                        <td>blur(10px)</td>
+                        <td>Glass morphism effect for modals/nav</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Code Examples -->
+        <div class="section">
+            <h2>Implementation Examples</h2>
+
+            <h3 style="margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem;">CSS Variables</h3>
+            <div class="code-block">
+/* Light Mode */
+:root {
+  --background: 0 0% 99%;
+  --foreground: 217 33% 17%;
+  --primary: 263 70% 50%;
+  --accent: 263 80% 55%;
+}
+
+/* Dark Mode */
+.dark {
+  --background: 217 32% 8%;
+  --foreground: 210 40% 98%;
+  --primary: 263 80% 65%;
+  --accent: 200 100% 60%;
+}
+
+/* Usage */
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+            </div>
+
+            <h3 style="margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem;">Tailwind Config</h3>
+            <div class="code-block">
+theme: {
+  extend: {
+    colors: {
+      background: "hsl(var(--background))",
+      foreground: "hsl(var(--foreground))",
+      primary: "hsl(var(--primary))",
+      accent: "hsl(var(--accent))",
+    }
+  }
+}
+            </div>
+
+            <h3 style="margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem;">Theme Toggle (React)</h3>
+            <div class="code-block">
+import { useTheme } from 'next-themes';
+
+export function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    &lt;button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}&gt;
+      Toggle Theme
+    &lt;/button&gt;
+  );
+}
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎨 Theme designed for modern, professional web experiences</p>
+            <p style="margin-top: 0.5rem;">Built with ❤️ for Tasticp's Landing Page</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme-preview-mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+
+        // Load saved preference
+        if (localStorage.getItem('theme-preview-mode') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

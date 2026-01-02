@@ -1,25 +1,54 @@
-// Import UI components from the shadcn/ui library
 import { Card, CardContent } from "@/componets/ui/card";
 import { Badge } from "@/componets/ui/badge";
-// Import icons from lucide-react library for visual elements
 import { Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
-// Next.js Image component for optimized image loading
 import Image from "next/image";
-// Next.js Link component for client-side navigation
 import Link from "next/link";
-// Custom components
 import Reveal from "@/components/Reveal";
 import Particles from "@/components/Particles";
 import ModernNav from "@/componets/ModernNav";
 import Marquee from "@/components/Marquee";
 import PartingClouds from "@/components/PartingClouds";
 
-// Main Home component - the landing page
 export default function Home() {
   const marqueeItems = [
-    "React • Next.js • TypeScript • Tailwind CSS • Vue.js",
-    "Node.js • Express • Python • SQL • MongoDB",
-    "Web Development • UI/UX • Full Stack • Cloud Architecture",
+    "🎨 Art • 🎵 Music • 📖 Stories • 💻 Coding • 🎮 Gaming",
+    "Creating • Exploring • Learning • Building • Experimenting",
+    "React • Next.js • TypeScript • Python • JavaScript • Rust",
+  ];
+
+  const projects = [
+    {
+      name: "Base44RogueLike",
+      description:
+        "An immersive JavaScript roguelike game with procedural generation and dynamic gameplay mechanics",
+      techs: ["JavaScript", "Game Development"],
+      url: "https://github.com/tasticp/Base44RogueLike",
+      language: "JavaScript",
+    },
+    {
+      name: "Browser Tasks Trial",
+      description:
+        "TypeScript-based browser task management and automation system for productivity tracking",
+      techs: ["TypeScript", "Browser APIs"],
+      url: "https://github.com/tasticp/Browser-tasks-trial-Est",
+      language: "TypeScript",
+    },
+    {
+      name: "Zed But Browser",
+      description:
+        "A Rust-based browser implementation inspired by the Zed editor architecture",
+      techs: ["Rust", "Browser Engine"],
+      url: "https://github.com/tasticp/Zed-But-Browser",
+      language: "Rust",
+    },
+    {
+      name: "Story Generator",
+      description:
+        "Python-powered creative writing tool that generates unique narratives and stories",
+      techs: ["Python", "NLP"],
+      url: "https://github.com/tasticp/story-generator",
+      language: "Python",
+    },
   ];
 
   return (
@@ -40,23 +69,25 @@ export default function Home() {
               <div className="space-y-4">
                 <p className="text-muted-foreground text-lg">Welcome 👋</p>
                 <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                  I'm Tasticp_
+                  I'm Kelvin
                 </h1>
                 <h2 className="text-3xl md:text-5xl gradient-text">
-                  Vibe Developer
+                  Creative Developer
                 </h2>
               </div>
 
               {/* Description */}
               <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                Building exceptional web experiences. JavaScript explorer,
-                design enthusiast, and perpetual learner.
+                Building innovative web experiences through JavaScript and
+                exploring creative coding. Passionate about game development,
+                storytelling, and pushing the boundaries of what's possible on
+                the web.
               </p>
 
               {/* Location */}
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="w-5 h-5" />
-                <span>Singapore, Singapore</span>
+                <span>Singapore 🇸🇬</span>
               </div>
             </Reveal>
 
@@ -93,10 +124,10 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <Reveal className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Skills & Technologies
+                Skills & Expertise
               </h2>
               <p className="text-xl text-muted-foreground">
-                Tools and technologies I work with
+                Technologies and tools I work with
               </p>
             </Reveal>
 
@@ -113,7 +144,7 @@ export default function Home() {
                       <div>
                         <h3 className="text-xl font-semibold">Frontend</h3>
                         <p className="text-sm text-muted-foreground">
-                          User interfaces
+                          Web interfaces
                         </p>
                       </div>
                     </div>
@@ -122,13 +153,13 @@ export default function Home() {
                       <Badge variant="secondary">Next.js</Badge>
                       <Badge variant="secondary">TypeScript</Badge>
                       <Badge variant="secondary">Tailwind CSS</Badge>
-                      <Badge variant="secondary">Vue.js</Badge>
+                      <Badge variant="secondary">JavaScript</Badge>
                     </div>
                   </CardContent>
                 </Card>
               </Reveal>
 
-              {/* Backend */}
+              {/* Backend & Systems */}
               <Reveal delayMs={100}>
                 <Card className="card-hover group hover:shadow-xl transition-all duration-300 gradient-border">
                   <CardContent className="p-8">
@@ -137,44 +168,44 @@ export default function Home() {
                         <span className="text-white font-bold text-lg">B</span>
                       </div>
                       <div>
-                        <h3 className="text-xl font-semibold">Backend</h3>
+                        <h3 className="text-xl font-semibold">Systems</h3>
                         <p className="text-sm text-muted-foreground">
-                          Server-side logic
+                          Languages & tools
                         </p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">Node.js</Badge>
-                      <Badge variant="secondary">Express</Badge>
                       <Badge variant="secondary">Python</Badge>
-                      <Badge variant="secondary">SQL</Badge>
-                      <Badge variant="secondary">MongoDB</Badge>
+                      <Badge variant="secondary">Rust</Badge>
+                      <Badge variant="secondary">C++</Badge>
+                      <Badge variant="secondary">C</Badge>
+                      <Badge variant="secondary">Node.js</Badge>
                     </div>
                   </CardContent>
                 </Card>
               </Reveal>
 
-              {/* Tools & Others */}
+              {/* Creative & Interests */}
               <Reveal delayMs={200}>
                 <Card className="card-hover group hover:shadow-xl transition-all duration-300 gradient-border">
                   <CardContent className="p-8">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">T</span>
+                        <span className="text-white font-bold text-lg">✨</span>
                       </div>
                       <div>
-                        <h3 className="text-xl font-semibold">Tools</h3>
+                        <h3 className="text-xl font-semibold">Interests</h3>
                         <p className="text-sm text-muted-foreground">
-                          Development tools
+                          Hobbies & passions
                         </p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">Git</Badge>
-                      <Badge variant="secondary">Docker</Badge>
-                      <Badge variant="secondary">AWS</Badge>
-                      <Badge variant="secondary">Figma</Badge>
-                      <Badge variant="secondary">REST APIs</Badge>
+                      <Badge variant="secondary">Game Dev</Badge>
+                      <Badge variant="secondary">Art</Badge>
+                      <Badge variant="secondary">Music</Badge>
+                      <Badge variant="secondary">Storytelling</Badge>
+                      <Badge variant="secondary">Creative Coding</Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -190,7 +221,7 @@ export default function Home() {
           <Reveal className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Experience</h2>
             <p className="text-xl text-muted-foreground">
-              Where I've worked and what I've built
+              My educational and learning journey
             </p>
           </Reveal>
 
@@ -200,25 +231,31 @@ export default function Home() {
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-2xl font-bold">Software Developer</h3>
-                      <p className="text-muted-foreground">Tech Company Name</p>
+                      <h3 className="text-2xl font-bold">
+                        Ngee Ann Polytechnic
+                      </h3>
+                      <p className="text-muted-foreground">
+                        Diploma in Information Technology
+                      </p>
                     </div>
                     <span className="text-sm text-muted-foreground px-3 py-1 bg-accent/50 rounded-full">
                       2023 - Present
                     </span>
                   </div>
                   <p className="text-muted-foreground mb-4">
-                    Building amazing web experiences with modern technologies
+                    Specializing in software development with focus on web
+                    technologies and systems programming. Engaging in capstone
+                    projects and collaborative development experiences.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="secondary" className="text-xs">
-                      React
+                      Web Development
                     </Badge>
                     <Badge variant="secondary" className="text-xs">
-                      Node.js
+                      Systems Design
                     </Badge>
                     <Badge variant="secondary" className="text-xs">
-                      TypeScript
+                      Team Projects
                     </Badge>
                   </div>
                 </CardContent>
@@ -230,26 +267,32 @@ export default function Home() {
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-2xl font-bold">Junior Developer</h3>
-                      <p className="text-muted-foreground">Startup XYZ</p>
+                      <h3 className="text-2xl font-bold">Self-Learning</h3>
+                      <p className="text-muted-foreground">
+                        Continuous Growth & Experimentation
+                      </p>
                     </div>
                     <span className="text-sm text-muted-foreground px-3 py-1 bg-accent/50 rounded-full">
-                      2022 - 2023
+                      Ongoing
                     </span>
                   </div>
                   <p className="text-muted-foreground mb-4">
-                    Contributed to full-stack development and learned best
-                    practices
+                    Building projects and exploring diverse technologies from
+                    game development to systems programming. Active contributor
+                    to open-source projects and experimental coding ventures.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="secondary" className="text-xs">
-                      React
+                      Game Development
                     </Badge>
                     <Badge variant="secondary" className="text-xs">
-                      JavaScript
+                      Creative Coding
                     </Badge>
                     <Badge variant="secondary" className="text-xs">
-                      CSS
+                      Open Source
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs">
+                      Experimentation
                     </Badge>
                   </div>
                 </CardContent>
@@ -259,7 +302,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section - Regular, visible */}
+      {/* Projects Section */}
       <section id="projects" className="py-20 px-6 bg-muted/50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <Reveal className="text-center mb-16">
@@ -267,71 +310,59 @@ export default function Home() {
               Featured Projects
             </h2>
             <p className="text-xl text-muted-foreground">
-              Some of my recent work
+              Some of my recent work and experiments
             </p>
           </Reveal>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <Reveal>
-              <Card className="card-hover overflow-hidden group">
-                <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
-                  <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-300"></div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Project Name</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Brief description of the project and its impact
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-2">
-                      <Badge variant="secondary" className="text-xs">
-                        React
-                      </Badge>
-                      <Badge variant="secondary" className="text-xs">
-                        API
-                      </Badge>
-                    </div>
-                    <a
-                      href="#"
-                      className="text-primary hover:underline flex items-center gap-1"
-                    >
-                      View <ExternalLink className="w-4 h-4" />
-                    </a>
+            {projects.map((project, index) => (
+              <Reveal key={project.name} delayMs={index * 100}>
+                <Card className="card-hover overflow-hidden group">
+                  <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
+                    <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-300"></div>
                   </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-
-            <Reveal delayMs={100}>
-              <Card className="card-hover overflow-hidden group">
-                <div className="h-48 bg-gradient-to-br from-pink-500 to-red-600 relative overflow-hidden">
-                  <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-300"></div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Another Project</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Description of what you built and learned
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-2">
-                      <Badge variant="secondary" className="text-xs">
-                        Next.js
-                      </Badge>
-                      <Badge variant="secondary" className="text-xs">
-                        Design
-                      </Badge>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-2">{project.name}</h3>
+                    <p className="text-muted-foreground mb-4">
+                      {project.description}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-2">
+                        {project.techs.map((tech) => (
+                          <Badge
+                            key={tech}
+                            variant="secondary"
+                            className="text-xs"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline flex items-center gap-1"
+                      >
+                        View <ExternalLink className="w-4 h-4" />
+                      </a>
                     </div>
-                    <a
-                      href="#"
-                      className="text-primary hover:underline flex items-center gap-1"
-                    >
-                      View <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
+                  </CardContent>
+                </Card>
+              </Reveal>
+            ))}
           </div>
+
+          <Reveal className="text-center mt-12">
+            <a
+              href="https://github.com/tasticp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-primary-foreground hover:opacity-90 transition"
+            >
+              <Github className="w-5 h-5" /> View All Projects on GitHub
+            </a>
+          </Reveal>
         </div>
       </section>
 
@@ -342,6 +373,10 @@ export default function Home() {
           <p className="text-muted-foreground">
             This is a hidden route. You found it by typing the URL!
           </p>
+          <p className="text-muted-foreground mt-4">
+            Explore more of my creative works and detailed project breakdowns
+            here.
+          </p>
         </div>
       </section>
 
@@ -350,7 +385,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold mb-8">Personal</h2>
           <p className="text-muted-foreground">
-            This is a hidden personal section. Easter egg discovered!
+            This is a hidden personal section. Easter egg discovered! 🎉
+          </p>
+          <p className="text-muted-foreground mt-4">
+            When I'm not coding, you can find me creating art, making music, or
+            getting lost in storytelling. I believe in blending technical skills
+            with creative expression to build unique experiences.
           </p>
         </div>
       </section>
@@ -433,7 +473,7 @@ export default function Home() {
           <div className="border-t border-border/40 pt-8">
             <div className="flex justify-between items-center">
               <p className="text-muted-foreground text-sm">
-                © 2024 Tasticp_. All rights reserved.
+                © 2024 Kelvin Cheong. All rights reserved.
               </p>
               <div className="flex gap-4">
                 <a
