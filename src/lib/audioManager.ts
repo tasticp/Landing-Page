@@ -22,7 +22,7 @@
  * - Mute preference is persisted to localStorage under key "audioManager.muted".
  */
 
-type Track = {
+export type Track = {
   src: string;
   title?: string;
   id?: string;
@@ -30,7 +30,7 @@ type Track = {
 
 type RepeatMode = "none" | "one" | "all";
 
-type Listener = (...args: any[]) => void;
+type Listener = (...args: unknown[]) => void;
 
 class AudioManager {
   private audio: HTMLAudioElement | null = null;
@@ -51,7 +51,10 @@ class AudioManager {
   constructor() {
     // initialize mute state from localStorage if available
     try {
-      const raw = typeof window !== "undefined" ? localStorage.getItem(this.STORAGE_KEY_MUTED) : null;
+      const raw =
+        typeof window !== "undefined"
+          ? localStorage.getItem(this.STORAGE_KEY_MUTED)
+          : null;
       this.mutedInternal = raw === "true";
     } catch {
       this.mutedInternal = false;
@@ -268,7 +271,7 @@ class AudioManager {
     this.listeners.get(event)?.delete(listener);
   }
 
-  private emit(event: string, ...args: any[]) {
+  private emit(event: string, ...args: unknown[]) {
     this.listeners.get(event)?.forEach((fn) => {
       try {
         fn(...args);
@@ -282,7 +285,10 @@ class AudioManager {
 
   private persistMuted() {
     try {
-      localStorage.setItem(this.STORAGE_KEY_MUTED, this.mutedInternal ? "true" : "false");
+      localStorage.setItem(
+        this.STORAGE_KEY_MUTED,
+        this.mutedInternal ? "true" : "false",
+      );
     } catch {
       // ignore
     }
@@ -336,8 +342,16 @@ class AudioManager {
         this.next();
       }
     };
-    const onError = (ev: any) => {
-      const err = ev?.error || new Error("Audio playback error");
+    const onError = (ev: unknown) => {
+      const errCandidate = (ev as { error?: unknown })?.error;
+      const err =
+        errCandidate instanceof Error
+          ? errCandidate
+          : new Error(
+              typeof errCandidate === "string"
+                ? errCandidate
+                : "Audio playback error",
+            );
       this.emit("error", err);
     };
 

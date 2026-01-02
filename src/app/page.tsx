@@ -8,6 +8,7 @@ import Particles from "@/components/Particles";
 import ModernNav from "@/componets/ModernNav";
 import PartingClouds from "@/components/PartingClouds";
 import AudioPlayer from "@/components/AudioPlayer";
+import ExternalPlaylists from "@/components/ExternalPlaylists";
 
 export default function Home() {
   const projects = [
@@ -240,6 +241,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* External Playlists (Spotify & YouTube) */}
+      <div className="mt-12 relative z-10">
+        <ExternalPlaylists />
+      </div>
 
       {/* Experience Section */}
       <section id="experience" className="py-20 px-6 relative z-10">

@@ -9,7 +9,7 @@ import {
   SkipBack,
   Volume2,
 } from "lucide-react";
-import audioManager from "@/lib/audioManager";
+import audioManager, { Track } from "@/lib/audioManager";
 
 type AudioPlayerProps = {
   /**
@@ -31,7 +31,7 @@ export default function AudioPlayer({
   fallback = "/audio/music.mp3",
   ariaLabel = "Toggle background music",
 }: AudioPlayerProps) {
-  const [playlist, setPlaylist] = useState(audioManager.getPlaylist());
+  const [playlist, setPlaylist] = useState<Track[]>(audioManager.getPlaylist());
   const [currentIndex, setCurrentIndex] = useState(
     audioManager.getCurrentIndex(),
   );
@@ -41,12 +41,53 @@ export default function AudioPlayer({
   const [loaded, setLoaded] = useState<boolean>(audioManager.isLoaded());
 
   useEffect(() => {
-    // If no tracks exist, add the fallback track so users have something to play
-    if (playlist.length === 0 && fallback) {
-      audioManager.addTrack(fallback, "Default track");
-      setPlaylist(audioManager.getPlaylist());
-      setCurrentIndex(audioManager.getCurrentIndex());
+    let mounted = true;
+
+    // Attempt to fetch a generated playlist.json at build-time (public/audio/playlist.json).
+    // If present, populate the audioManager playlist with these tracks.
+    async function initPlaylistFromFile() {
+      try {
+        const res = await fetch("/audio/playlist.json", { cache: "no-store" });
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            // Add tracks that are not yet present in audioManager
+            const existingSrcs = new Set(
+              audioManager.getPlaylist().map((t) => t.src),
+            );
+            const arr = data as unknown as Track[];
+            for (const t of arr) {
+              const src =
+                (t?.src ?? (t as any)?.filename)
+                  ? `/audio/${(t as any).filename}`
+                  : undefined;
+              const title = t?.title ?? (t as any)?.filename ?? undefined;
+              if (src && !existingSrcs.has(src)) {
+                audioManager.addTrack(src, title);
+              }
+            }
+            if (mounted) {
+              setPlaylist(audioManager.getPlaylist());
+              setCurrentIndex(audioManager.getCurrentIndex());
+            }
+            return;
+          }
+        }
+      } catch {
+        // ignore fetch errors — we'll fall back below
+      }
+
+      // If no playlist file or fetch failed, ensure at least the fallback exists
+      if (audioManager.getPlaylist().length === 0 && fallback) {
+        audioManager.addTrack(fallback, "Default track");
+        if (mounted) {
+          setPlaylist(audioManager.getPlaylist());
+          setCurrentIndex(audioManager.getCurrentIndex());
+        }
+      }
     }
+
+    initPlaylistFromFile();
 
     // Subscribe to audioManager events to keep UI in sync
     const unsubPlay = audioManager.on("play", () => {
@@ -61,15 +102,22 @@ export default function AudioPlayer({
       setCurrentIndex(audioManager.getCurrentIndex());
       setLoaded(audioManager.isLoaded());
     });
-    const unsubMute = audioManager.on("mute", (m: boolean) => setMuted(m));
-    const unsubVolume = audioManager.on("volumechange", (v: number) =>
-      setVolume(v),
-    );
-    const unsubPlaylist = audioManager.on("playlistchange", (pl: any) =>
-      setPlaylist(pl),
+
+    // Cast event payloads safely from unknown to expected types
+    const unsubMute = audioManager.on("mute", (m: unknown) => {
+      setMuted(Boolean(m));
+    });
+    const unsubVolume = audioManager.on("volumechange", (v: unknown) => {
+      if (typeof v === "number") {
+        setVolume(v);
+      }
+    });
+    const unsubPlaylist = audioManager.on("playlistchange", (pl: unknown) =>
+      setPlaylist(pl as Track[]),
     );
 
     return () => {
+      mounted = false;
       unsubPlay();
       unsubPause();
       unsubLoaded();
@@ -116,7 +164,7 @@ export default function AudioPlayer({
   };
 
   // Helper to display a title for a track
-  const trackLabel = (t: any, idx: number) =>
+  const trackLabel = (t: Track, idx: number) =>
     t?.title
       ? `${idx + 1}. ${t.title}`
       : `${idx + 1}. ${t?.src?.split("/").pop() || "Track"}`;
@@ -210,7 +258,7 @@ export default function AudioPlayer({
             onChange={(e) => selectTrack(Number(e.target.value))}
             className="bg-background border border-border/20 rounded px-2 py-1"
           >
-            {playlist.map((t: any, i: number) => (
+            {playlist.map((t: Track, i: number) => (
               <option key={t.id ?? t.src ?? i} value={i}>
                 {trackLabel(t, i)}
               </option>
