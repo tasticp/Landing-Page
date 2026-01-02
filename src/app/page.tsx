@@ -6,7 +6,6 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Particles from "@/components/Particles";
 import ModernNav from "@/componets/ModernNav";
-import Marquee from "@/components/Marquee";
 import PartingClouds from "@/components/PartingClouds";
 
 export default function Home() {
@@ -63,19 +62,16 @@ export default function Home() {
               <div className="space-y-4">
                 <p className="text-muted-foreground text-lg">Welcome 👋</p>
                 <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                  I'm Kelvin
+                  I'm tasticp_
                 </h1>
                 <h2 className="text-3xl md:text-5xl gradient-text">
-                  Creative Developer
+                  ? Developer
                 </h2>
               </div>
 
               {/* Description */}
               <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                Building innovative web experiences through JavaScript and
-                exploring creative coding. Passionate about game development,
-                storytelling, and pushing the boundaries of what's possible on
-                the web.
+                Js F**king arnd IDK fam
               </p>
 
               {/* Location */}
@@ -106,11 +102,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Marquee Section */}
-      <div className="mt-20 relative z-10">
-        <Marquee />
-      </div>
 
       {/* Skills Section with Parting Clouds */}
       <PartingClouds>
@@ -467,7 +458,7 @@ export default function Home() {
           <div className="border-t border-border/40 pt-8">
             <div className="flex justify-between items-center">
               <p className="text-muted-foreground text-sm">
-                © 2024 Kelvin Cheong. All rights reserved.
+                © 2026 tasticp_ . All rights reserved.
               </p>
               <div className="flex gap-4">
                 <a

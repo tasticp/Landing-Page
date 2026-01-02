@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { Menu, X, Moon, Sun } from "lucide-react";
 
@@ -9,24 +9,46 @@ export default function ModernNav() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isOpen]);
+
+  const handleNavClick = () => {
+    setIsOpen(false);
+  };
 
   return (
     <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-gradient-to-b from-background via-background/95 to-background/80 border-b border-border/20 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center font-bold text-white text-sm group-hover:scale-110 transition-transform duration-300 shadow-lg">
+          <a
+            href="https://tasticp.carrd.co/"
+            className="flex items-center gap-3 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-foreground flex items-center justify-center font-bold text-background text-sm group-hover:scale-110 transition-transform duration-300 shadow-lg">
               T_
             </div>
-            <span className="hidden sm:inline font-black text-lg bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+            <span className="hidden sm:inline font-black text-lg text-foreground">
               tasticp
             </span>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2">
@@ -116,9 +138,9 @@ export default function ModernNav() {
                   }
                 >
                   {theme === "dark" ? (
-                    <Sun className="w-5 h-5 text-yellow-500 transition-all duration-500" />
+                    <Sun className="w-5 h-5 text-foreground transition-all duration-500" />
                   ) : (
-                    <Moon className="w-5 h-5 text-slate-700 transition-all duration-500" />
+                    <Moon className="w-5 h-5 text-foreground transition-all duration-500" />
                   )}
                 </button>
               )}
@@ -134,9 +156,9 @@ export default function ModernNav() {
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
-                  <Sun className="w-5 h-5 text-yellow-500" />
+                  <Sun className="w-5 h-5 text-foreground" />
                 ) : (
-                  <Moon className="w-5 h-5 text-slate-700" />
+                  <Moon className="w-5 h-5 text-foreground" />
                 )}
               </button>
             )}
@@ -157,18 +179,18 @@ export default function ModernNav() {
 
         {/* Mobile Navigation Menu */}
         {isOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/20 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div
+            ref={menuRef}
+            className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/20 animate-in fade-in slide-in-from-top-2 duration-300 z-40"
+          >
             <div className="px-4 py-4 space-y-3">
-              <MobileNavLink href="#about" onClick={() => setIsOpen(false)}>
+              <MobileNavLink href="#about" onClick={handleNavClick}>
                 About
               </MobileNavLink>
-              <MobileNavLink
-                href="#experience"
-                onClick={() => setIsOpen(false)}
-              >
+              <MobileNavLink href="#experience" onClick={handleNavClick}>
                 Experience
               </MobileNavLink>
-              <MobileNavLink href="#projects" onClick={() => setIsOpen(false)}>
+              <MobileNavLink href="#projects" onClick={handleNavClick}>
                 Projects
               </MobileNavLink>
 
@@ -177,7 +199,8 @@ export default function ModernNav() {
                   href="https://github.com/tasticp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors"
+                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors cursor-pointer"
+                  onClick={handleNavClick}
                 >
                   GitHub
                 </a>
@@ -185,7 +208,8 @@ export default function ModernNav() {
                   href="https://www.linkedin.com/in/kelvin-cheong-tasticp/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors"
+                  className="block px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-center font-medium text-sm transition-colors cursor-pointer"
+                  onClick={handleNavClick}
                 >
                   LinkedIn
                 </a>
@@ -193,7 +217,8 @@ export default function ModernNav() {
                   href="/resume/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center font-medium text-sm"
+                  className="block px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center font-medium text-sm cursor-pointer"
+                  onClick={handleNavClick}
                 >
                   Download CV
                 </a>
