@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import Particles from "@/components/Particles";
 import ModernNav from "@/componets/ModernNav";
 import PartingClouds from "@/components/PartingClouds";
+import AudioPlayer from "@/components/AudioPlayer";
 
 export default function Home() {
   const projects = [
@@ -500,7 +501,7 @@ export default function Home() {
               <p className="text-muted-foreground text-sm">
                 © 2026 tasticp_ . All rights reserved.
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-center">
                 <a
                   href="https://github.com/tasticp"
                   target="_blank"
@@ -509,6 +510,10 @@ export default function Home() {
                 >
                   <Github className="w-5 h-5" />
                 </a>
+                <div className="flex items-center">
+                  {/* AudioPlayer expects a file at /public/audio/music.mp3 — drop your file there */}
+                  <AudioPlayer />
+                </div>
                 <a
                   href="https://www.linkedin.com/in/kelvin-cheong-tasticp/"
                   target="_blank"

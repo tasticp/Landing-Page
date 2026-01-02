@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Volume2 } from "lucide-react";
+import audioManager from "@/lib/audioManager";
 
 export default function ModernNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,25 @@ export default function ModernNav() {
   const [mounted, setMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
+
+  // Global mute state synced with audioManager
+  const [muted, setMuted] = useState<boolean>(() => {
+    try {
+      return audioManager.isMuted();
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    // Keep mute state in sync with audioManager
+    const unsub = audioManager.on("mute", (m: boolean) => {
+      setMuted(!!m);
+    });
+    return () => {
+      if (typeof unsub === "function") unsub();
+    };
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -53,7 +73,7 @@ export default function ModernNav() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 w-full z-50 backdrop-blur-xl bg-gradient-to-b from-background via-background/95 to-background/80 border-b border-border/20 shadow-sm pointer-events-auto"
+      className="fixed top-0 w-full z-[9999] backdrop-blur-xl bg-gradient-to-b from-background via-background/95 to-background/80 border-b border-border/20 shadow-sm pointer-events-auto"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -146,24 +166,43 @@ export default function ModernNav() {
                 CV
               </a>
 
-              {/* Theme Toggle */}
+              {/* Theme & Music Toggle */}
               {mounted && (
-                <button
-                  onClick={handleThemeToggle}
-                  className="ml-2 p-2.5 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 hover:border-accent/60 transition-all duration-300 group cursor-pointer pointer-events-auto"
-                  aria-label={
-                    theme === "dark"
-                      ? "Switch to light mode"
-                      : "Switch to dark mode"
-                  }
-                  type="button"
-                >
-                  {theme === "dark" ? (
-                    <Sun className="w-5 h-5 text-foreground transition-all duration-500" />
-                  ) : (
-                    <Moon className="w-5 h-5 text-foreground transition-all duration-500" />
-                  )}
-                </button>
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      audioManager.toggleMute();
+                      setMuted(audioManager.isMuted());
+                    }}
+                    className="ml-2 p-2.5 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 hover:border-accent/60 transition-all duration-300 group cursor-pointer pointer-events-auto"
+                    aria-pressed={muted}
+                    aria-label={muted ? "Unmute site audio" : "Mute site audio"}
+                    type="button"
+                  >
+                    <Volume2
+                      className={`w-5 h-5 transition-all duration-500 ${muted ? "opacity-60" : "opacity-100"}`}
+                    />
+                  </button>
+
+                  <button
+                    onClick={handleThemeToggle}
+                    className="ml-2 p-2.5 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 hover:border-accent/60 transition-all duration-300 group cursor-pointer pointer-events-auto"
+                    aria-label={
+                      theme === "dark"
+                        ? "Switch to light mode"
+                        : "Switch to dark mode"
+                    }
+                    type="button"
+                  >
+                    {theme === "dark" ? (
+                      <Sun className="w-5 h-5 text-foreground transition-all duration-500" />
+                    ) : (
+                      <Moon className="w-5 h-5 text-foreground transition-all duration-500" />
+                    )}
+                  </button>
+                </>
               )}
             </div>
           </div>
@@ -171,18 +210,35 @@ export default function ModernNav() {
           {/* Mobile Menu */}
           <div className="md:hidden flex items-center gap-2 pointer-events-auto">
             {mounted && (
-              <button
-                onClick={handleThemeToggle}
-                className="p-2 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 transition-all cursor-pointer pointer-events-auto"
-                aria-label="Toggle theme"
-                type="button"
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-5 h-5 text-foreground" />
-                ) : (
-                  <Moon className="w-5 h-5 text-foreground" />
-                )}
-              </button>
+              <>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    audioManager.toggleMute();
+                    setMuted(audioManager.isMuted());
+                  }}
+                  className="p-2 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 transition-all cursor-pointer pointer-events-auto"
+                  aria-pressed={muted}
+                  aria-label={muted ? "Unmute site audio" : "Mute site audio"}
+                  type="button"
+                >
+                  <Volume2 className="w-5 h-5 text-foreground" />
+                </button>
+
+                <button
+                  onClick={handleThemeToggle}
+                  className="p-2 rounded-lg border border-border/40 bg-background/40 hover:bg-accent/20 transition-all cursor-pointer pointer-events-auto"
+                  aria-label="Toggle theme"
+                  type="button"
+                >
+                  {theme === "dark" ? (
+                    <Sun className="w-5 h-5 text-foreground" />
+                  ) : (
+                    <Moon className="w-5 h-5 text-foreground" />
+                  )}
+                </button>
+              </>
             )}
 
             <button
@@ -204,7 +260,7 @@ export default function ModernNav() {
         {isOpen && (
           <div
             ref={menuRef}
-            className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/20 animate-in fade-in slide-in-from-top-2 duration-300 z-40 pointer-events-auto"
+            className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/20 animate-in fade-in slide-in-from-top-2 duration-300 z-[9999] pointer-events-auto"
           >
             <div className="px-4 py-4 space-y-3 pointer-events-auto">
               <MobileNavLink href="#about" onClick={handleNavClick}>
