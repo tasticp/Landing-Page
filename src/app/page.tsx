@@ -10,12 +10,6 @@ import Marquee from "@/components/Marquee";
 import PartingClouds from "@/components/PartingClouds";
 
 export default function Home() {
-  const marqueeItems = [
-    "🎨 Art • 🎵 Music • 📖 Stories • 💻 Coding • 🎮 Gaming",
-    "Creating • Exploring • Learning • Building • Experimenting",
-    "React • Next.js • TypeScript • Python • JavaScript • Rust",
-  ];
-
   const projects = [
     {
       name: "Base44RogueLike",
@@ -115,7 +109,7 @@ export default function Home() {
 
       {/* Marquee Section */}
       <div className="mt-20 relative z-10">
-        <Marquee items={marqueeItems} speed={50} />
+        <Marquee />
       </div>
 
       {/* Skills Section with Parting Clouds */}
@@ -235,7 +229,7 @@ export default function Home() {
                         Ngee Ann Polytechnic
                       </h3>
                       <p className="text-muted-foreground">
-                        Diploma in Information Technology
+                        Diploma in Mechatronics & Robotics
                       </p>
                     </div>
                     <span className="text-sm text-muted-foreground px-3 py-1 bg-accent/50 rounded-full">
