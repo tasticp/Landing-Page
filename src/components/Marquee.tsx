@@ -101,6 +101,7 @@ export default function Marquee({
   );
 
   // Duplicate items for a smooth, continuous loop (CSS moves the entire container).
+  // The animation will translate by -50% so we see one full cycle, then loop seamlessly.
   const repeatedItems = [...items, ...items];
 
   return (

@@ -9,7 +9,7 @@ import ModernNav from "@/componets/ModernNav";
 import PartingClouds from "@/components/PartingClouds";
 import AudioPlayer from "@/components/AudioPlayer";
 import Marquee from "@/components/Marquee";
-import ExternalPlaylists from "@/components/ExternalPlaylists";
+import GitHubPlaylistLoader from "@/components/GitHubPlaylistLoader";
 
 /**
  * Home page for Kelvin Cheong (tasticp_)
@@ -66,6 +66,13 @@ export default function Home() {
       {/* Background visual: particles */}
       <Particles />
 
+      {/* GitHub Playlist Loader - fetches playlist from repo */}
+      <GitHubPlaylistLoader
+        owner="tasticp"
+        repo="my-playlists"
+        path="playlist.json"
+      />
+
       {/* Top navigation (keeps current look/feel) */}
       <ModernNav />
 
@@ -76,18 +83,10 @@ export default function Home() {
             {/* Left: intro */}
             <Reveal className="space-y-8 animate-fade-in-up">
               <div className="space-y-4">
-                <p className="text-muted-foreground text-lg">Hello — I'm</p>
-
-                {/* Prominent name (animated gradient + neon glow for personality) */}
-                <h1 className="text-5xl md:text-7xl font-bold leading-tight neon-glow animated-gradient p-2 rounded-md inline-block">
-                  Kelvin Cheong
-                  <span className="text-primary"> (tasticp_)</span>
-                </h1>
-
-                {/* Short tagline with typing animation for a unique hero feel */}
-                <h2 className="text-3xl md:text-5xl gradient-text typing-animation">
+                {/* Professional tagline */}
+                <h1 className="text-5xl md:text-7xl font-bold leading-tight gradient-text typing-animation">
                   Developer • Systems tinkerer • Game maker
-                </h2>
+                </h1>
               </div>
 
               {/* Short bio */}
@@ -238,11 +237,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* External Playlists + fun audio */}
-      <div className="mt-12 relative z-10">
-        <ExternalPlaylists />
-      </div>
 
       {/* EXPERIENCE */}
       <section id="experience" className="py-20 px-6 relative z-10">

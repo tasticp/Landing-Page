@@ -24,6 +24,7 @@ type AudioPlayerProps = {
  * AudioPlayer (playlist + controls)
  * - Uses the singleton audioManager for playback and playlist management
  * - Exposes track selection UI and play/pause/prev/next/volume controls
+ * - Toggles visibility when clicking the music icon (closed by default)
  *
  * Note: Place audio files under public/audio/ and they will be reachable as "/audio/<file>"
  */
@@ -39,6 +40,7 @@ export default function AudioPlayer({
   const [volume, setVolume] = useState<number>(audioManager.getVolume());
   const [muted, setMuted] = useState<boolean>(audioManager.isMuted());
   const [loaded, setLoaded] = useState<boolean>(audioManager.isLoaded());
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -175,6 +177,11 @@ export default function AudioPlayer({
     setMuted(audioManager.isMuted());
   };
 
+  // Toggle open/close state
+  const togglePanel = () => {
+    setIsOpen(!isOpen);
+  };
+
   // Helper to display a title for a track
   const trackLabel = (t: Track, idx: number) =>
     t?.title
@@ -182,102 +189,108 @@ export default function AudioPlayer({
       : `${idx + 1}. ${t?.src?.split("/").pop() || "Track"}`;
 
   return (
-    <div className="flex items-center gap-3">
-      {/* Small music icon */}
-      <div
+    <div className="flex items-center gap-3 relative">
+      {/* Music icon - toggles panel */}
+      <button
+        onClick={togglePanel}
         className="p-2 rounded-md bg-accent/10 hover:bg-accent/20 transition-colors flex items-center justify-center"
-        title="Music"
-        aria-hidden="true"
+        title="Toggle music player"
+        aria-label="Toggle music player"
+        aria-expanded={isOpen}
       >
         <Music className="w-5 h-5 text-foreground" />
-      </div>
+      </button>
 
-      {/* Track selector */}
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={prev}
-          aria-label="Previous track"
-          className="p-2 rounded-md hover:bg-accent/10 transition-colors"
-        >
-          <SkipBack className="w-4 h-4" />
-        </button>
+      {/* Expandable controls panel */}
+      {isOpen && (
+        <div className="flex items-center gap-3 bg-background/80 backdrop-blur-sm border border-border/20 rounded-lg p-3">
+          {/* Track selector */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={prev}
+              aria-label="Previous track"
+              className="p-2 rounded-md hover:bg-accent/10 transition-colors"
+            >
+              <SkipBack className="w-4 h-4" />
+            </button>
 
-        <button
-          type="button"
-          onClick={togglePlay}
-          aria-label={ariaLabel}
-          className="flex items-center gap-2 px-3 py-2 rounded-md bg-background/80 border border-border/20 hover:bg-accent/10 transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          {isPlaying ? (
-            <>
-              <Pause className="w-4 h-4" />
-              <span className="text-sm">Pause</span>
-            </>
-          ) : (
-            <>
-              <Play className="w-4 h-4" />
-              <span className="text-sm">{loaded ? "Play" : "Load & Play"}</span>
-            </>
-          )}
-        </button>
+            <button
+              type="button"
+              onClick={togglePlay}
+              aria-label={ariaLabel}
+              className="flex items-center gap-2 px-3 py-2 rounded-md bg-background/80 border border-border/20 hover:bg-accent/10 transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {isPlaying ? (
+                <>
+                  <Pause className="w-4 h-4" />
+                  <span className="text-sm">Pause</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-4 h-4" />
+                  <span className="text-sm">
+                    {loaded ? "Play" : "Load & Play"}
+                  </span>
+                </>
+              )}
+            </button>
 
-        <button
-          type="button"
-          onClick={next}
-          aria-label="Next track"
-          className="p-2 rounded-md hover:bg-accent/10 transition-colors"
-        >
-          <SkipForward className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* Volume + mute */}
-      <div className="flex items-center gap-2 ml-2">
-        <button
-          type="button"
-          onClick={toggleMute}
-          aria-pressed={muted}
-          aria-label="Mute music"
-          className="p-2 rounded-md hover:bg-accent/10 transition-colors"
-        >
-          <Volume2 className="w-4 h-4" />
-        </button>
-
-        <input
-          aria-label="Music volume"
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={(e) => changeVolume(Number(e.target.value))}
-          className="w-24 h-2 bg-muted rounded"
-        />
-      </div>
-
-      {/* Playlist dropdown / list */}
-      <div className="ml-4">
-        {playlist.length === 0 ? (
-          <div className="text-sm text-muted-foreground">
-            No tracks — drop files into public/audio/ as music.mp3 (or add via
-            AudioManager)
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Next track"
+              className="p-2 rounded-md hover:bg-accent/10 transition-colors"
+            >
+              <SkipForward className="w-4 h-4" />
+            </button>
           </div>
-        ) : (
-          <select
-            aria-label="Select track"
-            value={currentIndex}
-            onChange={(e) => selectTrack(Number(e.target.value))}
-            className="bg-background border border-border/20 rounded px-2 py-1"
-          >
-            {playlist.map((t: Track, i: number) => (
-              <option key={t.id ?? t.src ?? i} value={i}>
-                {trackLabel(t, i)}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
+
+          {/* Volume + mute */}
+          <div className="flex items-center gap-2 ml-2 border-l border-border/20 pl-3">
+            <button
+              type="button"
+              onClick={toggleMute}
+              aria-pressed={muted}
+              aria-label="Mute music"
+              className="p-2 rounded-md hover:bg-accent/10 transition-colors"
+            >
+              <Volume2 className="w-4 h-4" />
+            </button>
+
+            <input
+              aria-label="Music volume"
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={volume}
+              onChange={(e) => changeVolume(Number(e.target.value))}
+              className="w-24 h-2 bg-muted rounded"
+            />
+          </div>
+
+          {/* Playlist dropdown / list */}
+          <div className="ml-2 border-l border-border/20 pl-3">
+            {playlist.length === 0 ? (
+              <div className="text-sm text-muted-foreground">No tracks</div>
+            ) : (
+              <select
+                aria-label="Select track"
+                value={currentIndex}
+                onChange={(e) => selectTrack(Number(e.target.value))}
+                className="bg-background border border-border/20 rounded px-2 py-1 text-sm"
+              >
+                {playlist.map((t: Track, i: number) => (
+                  <option key={t.id ?? t.src ?? i} value={i}>
+                    {trackLabel(t, i)}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
