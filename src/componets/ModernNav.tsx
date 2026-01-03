@@ -81,11 +81,21 @@ export default function ModernNav() {
           <button
             onClick={handleLogoClick}
             className="flex items-center gap-3 group cursor-pointer hover:opacity-80 transition-opacity"
+            aria-label="Open personal site"
+            title="Kelvin (tasticp_)"
           >
-            <div className="w-10 h-10 rounded-xl bg-foreground flex items-center justify-center font-bold text-background text-sm group-hover:scale-110 transition-transform duration-300 shadow-lg">
-              T_
+            {/* Animated gradient square logo (uses .nav-logo and .logo-micro-anim in global.css) */}
+            <div
+              className="nav-logo logo-micro-anim w-10 h-10 rounded-xl flex items-center justify-center font-bold text-background text-sm shadow-lg"
+              role="img"
+              aria-hidden="true"
+            >
+              <span className="logo-text" aria-hidden="true">
+                T
+              </span>
             </div>
-            <span className="hidden sm:inline font-black text-lg text-foreground">
+
+            <span className="hidden sm:inline font-black text-lg text-foreground logo-text">
               tasticp
             </span>
           </button>
