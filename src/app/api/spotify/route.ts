@@ -122,7 +122,7 @@ async function getPlaylistFromSpotify(
   playlistId: string,
   limit = 50,
   offset = 0,
-): Promise<any> {
+): Promise<unknown> {
   const globalObj = globalThis as unknown as Record<string, unknown>;
   const key = playlistCacheKey(playlistId, limit, offset);
   const cached = globalObj[key] as PlaylistCacheEntry | undefined;

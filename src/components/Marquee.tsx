@@ -33,7 +33,11 @@ type MarqueeProps = {
  * - Duplicates the items content so the CSS animation can loop seamlessly.
  * - Respects the user's `prefers-reduced-motion` setting and disables the animation when requested.
  */
-export default function Marquee({ items, speed = 20, className = "" }: MarqueeProps) {
+export default function Marquee({
+  items,
+  speed = 20,
+  className = "",
+}: MarqueeProps) {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -53,13 +57,20 @@ export default function Marquee({ items, speed = 20, className = "" }: MarqueePr
       mq.addEventListener("change", handler);
       return () => mq.removeEventListener("change", handler);
     } else {
-      // Older browsers
-      // @ts-ignore
-      mq.addListener(handler);
-      return () => {
-        // @ts-ignore
-        mq.removeListener(handler);
+      // Older browsers (legacy MediaQueryList API).
+      // Support the older addListener/removeListener if present without using ts-ignore directives.
+      const legacy = mq as unknown as {
+        addListener?: (listener: (ev: MediaQueryListEvent) => void) => void;
+        removeListener?: (listener: (ev: MediaQueryListEvent) => void) => void;
       };
+      if (typeof legacy.addListener === "function") {
+        legacy.addListener(handler);
+        return () => {
+          if (typeof legacy.removeListener === "function") {
+            legacy.removeListener(handler);
+          }
+        };
+      }
     }
   }, []);
 

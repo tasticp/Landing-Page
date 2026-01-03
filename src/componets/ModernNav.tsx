@@ -23,8 +23,13 @@ export default function ModernNav() {
 
   useEffect(() => {
     // Keep mute state in sync with audioManager
-    const unsub = audioManager.on("mute", (m: boolean) => {
-      setMuted(!!m);
+    // audioManager emits events with unknown args; parse the first argument safely.
+    const unsub = audioManager.on("mute", (...args: unknown[]) => {
+      // First arg is expected to be a boolean (mute state), but be defensive.
+      const maybeMuted = args && args.length > 0 ? args[0] : undefined;
+      const isMuted =
+        typeof maybeMuted === "boolean" ? maybeMuted : Boolean(maybeMuted);
+      setMuted(!!isMuted);
     });
     return () => {
       if (typeof unsub === "function") unsub();

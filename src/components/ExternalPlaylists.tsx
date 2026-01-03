@@ -25,14 +25,27 @@ import audioManager, { Track } from "@/lib/audioManager";
  * Note: Playing tracks requires a user gesture in browsers. The user should click Play in the AudioPlayer to start playback.
  */
 
+/**
+ * Strongly-typed helpers for Spotify payload shapes used by this component.
+ * - ExternalURLs: a map of provider -> url (e.g. { spotify: "https://..." })
+ * - ImageObject: common shape returned by Spotify for album images
+ */
+type ExternalURLs = Record<string, string>;
+type ImageObject = { url: string; height?: number; width?: number };
+
 type SpotifyItem = {
   id: string;
   name: string;
   preview_url: string | null;
   duration_ms?: number;
   artists?: { id?: string; name?: string }[];
-  album?: { id?: string; name?: string; images?: any[]; external_urls?: any };
-  external_urls?: any;
+  album?: {
+    id?: string;
+    name?: string;
+    images?: ImageObject[];
+    external_urls?: ExternalURLs;
+  };
+  external_urls?: ExternalURLs;
 };
 
 type SpotifyPayload = {
@@ -49,6 +62,8 @@ type YouTubeItem = {
   title?: string;
   description?: string;
   thumbnails?: Record<string, { url: string }>;
+  publishedAt?: string;
+  channelTitle?: string;
   duration?: string | null;
   statistics?: { viewCount?: string } | null;
 };

@@ -1,39 +1,46 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 
 interface PartingCloudsProps {
-  children: React.ReactNode
-  triggerOffset?: number
+  children: React.ReactNode;
+  triggerOffset?: number;
 }
 
-export default function PartingClouds({ children, triggerOffset = 0.3 }: PartingCloudsProps) {
-  const elementRef = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+export default function PartingClouds({
+  children,
+  triggerOffset = 0.3,
+}: PartingCloudsProps) {
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.unobserve(entry.target)
+          setIsVisible(true);
+          observer.unobserve(entry.target);
         }
       },
       {
         threshold: triggerOffset,
-      }
-    )
+      },
+    );
 
     if (elementRef.current) {
-      observer.observe(elementRef.current)
+      observer.observe(elementRef.current);
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current)
+      // Capture the current elementRef value to avoid using a stale ref in the cleanup.
+      // This prevents the eslint/react-hooks warning about reading `elementRef.current`
+      // inside the cleanup where it might have changed.
+      const current = elementRef.current;
+      if (current) {
+        observer.unobserve(current);
       }
-    }
-  }, [triggerOffset])
+    };
+  }, [triggerOffset]);
 
   return (
     <div
@@ -44,5 +51,5 @@ export default function PartingClouds({ children, triggerOffset = 0.3 }: Parting
         {children}
       </div>
     </div>
-  )
+  );
 }
