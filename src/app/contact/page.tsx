@@ -1,66 +1,124 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Mail, Linkedin, Github, MapPin } from "lucide-react";
 
 export default function ContactPage() {
-  const router = useRouter()
-  const [submitting, setSubmitting] = useState(false)
-
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const form = event.currentTarget
-    const formData = new FormData(form)
-    setSubmitting(true)
-    try {
-      await fetch("/api/contact", { method: "POST", body: formData })
-      router.push("/contact/success")
-    } catch (_) {
-      setSubmitting(false)
-      alert("Something went wrong. Please try again.")
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-background py-16 px-6">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Contact Me</h1>
-        <p className="text-muted-foreground mb-10 text-center">
-          Fill out the form below and I’ll get back to you shortly.
-        </p>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1 py-12">
+        <div className="container max-w-4xl">
+          <h1 className="text-4xl font-bold mb-8">contact</h1>
+          <p className="text-muted-foreground mb-12 max-w-2xl">
+            [Add a brief message about getting in touch. Let visitors know
+            you're open to opportunities, collaborations, or just a chat.]
+          </p>
 
-        <form onSubmit={onSubmit} className="space-y-6 bg-card p-6 rounded-lg border">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Contact Info */}
+            <div className="space-y-6">
+              <Card className="border-border/50 bg-card/50 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="text-lg">Get in touch</CardTitle>
+                  <CardDescription>
+                    [Add a friendly message here]
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center gap-3 text-foreground/80">
+                    <Mail className="h-5 w-5 text-primary" />
+                    <span>[your@email.com]</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-foreground/80">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    <span>[Your Location]</span>
+                  </div>
+                </CardContent>
+              </Card>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="text-sm font-medium">Name</label>
-              <input id="name" name="name" type="text" required placeholder="Your name" className="w-full rounded-md border bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-ring" />
+              <Card className="border-border/50 bg-card/50 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="text-lg">Connect</CardTitle>
+                </CardHeader>
+                <CardContent className="flex gap-2">
+                  <Button variant="outline" size="icon" asChild>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                      <Github className="h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <a href="mailto:[your@email.com]">
+                      <Mail className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-medium">Email</label>
-              <input id="email" name="email" type="email" required placeholder="you@example.com" className="w-full rounded-md border bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-ring" />
-            </div>
-          </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="subject" className="text-sm font-medium">Subject</label>
-            <input id="subject" name="subject" type="text" placeholder="What’s this about?" className="w-full rounded-md border bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-ring" />
+            {/* Contact Form */}
+            <Card className="border-border/50 bg-card/50 backdrop-blur">
+              <CardHeader>
+                <CardTitle className="text-lg">Send a message</CardTitle>
+                <CardDescription>
+                  Fill out the form below and I'll get back to you soon.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                      id="name"
+                      placeholder="Your name"
+                      className="bg-background/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      className="bg-background/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="Your message..."
+                      rows={4}
+                      className="bg-background/50"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full">
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="message" className="text-sm font-medium">Message</label>
-            <textarea id="message" name="message" required rows={6} placeholder="Tell me a bit about your project" className="w-full rounded-md border bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-ring" />
-          </div>
-
-          <div className="flex justify-end">
-            <button type="submit" disabled={submitting} className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 transition disabled:opacity-60">
-              {submitting ? "Sending…" : "Send Message"}
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }
-
-
