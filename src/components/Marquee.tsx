@@ -1,138 +1,67 @@
-"use client";
+import { HTMLAttributes, ReactNode } from "react";
+import "./app/global.css";
+import "./lib/utils.ts";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
-
-type MarqueeProps = {
-  /**
-   * Array of strings to display in the marquee.
-   * Each string will be shown in sequence and duplicated for a seamless loop.
-   */
-  items: string[];
-  /**
-   * Speed value (higher = slower). This maps directly to the animation duration in seconds.
-   * Example:
-   *  - `speed={20}` -> 20s full loop (default)
-   *  - `speed={80}` -> 80s full loop (much slower)
-   *
-   * If omitted the component uses 20 seconds as a sensible default.
-   */
-  speed?: number;
-  /**
-   * Optional additional CSS classes for the root container
-   */
-  className?: string;
+export type MarqueeProps = HTMLAttributes<HTMLDivElement> & {
+  children: ReactNode;
+  direction?: "left" | "up";
+  pauseOnHover?: boolean;
+  reverse?: boolean;
+  fade?: boolean;
+  innerClassName?: string;
+  numberOfCopies?: number;
 };
 
-/**
- * Marquee component
- *
- * - Uses the `.marquee` and `.marquee-content` CSS in `global.css` (the project already
- *   contains keyframes and hover-to-pause rules).
- * - Accepts `items` and `speed` props. `speed` is interpreted as seconds for the full
- *   animation loop (higher = slower) to match the project's UI notes.
- * - Duplicates the items content so the CSS animation can loop seamlessly.
- * - Respects the user's `prefers-reduced-motion` setting and disables the animation when requested.
- */
-export default function Marquee({
-  items,
-  speed = 20,
-  className = "",
+export function Marquee({
+  children,
+  direction = "left",
+  pauseOnHover = false,
+  reverse = false,
+  fade = false,
+  className,
+  innerClassName,
+  numberOfCopies = 2,
+  ...rest
 }: MarqueeProps) {
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  // The computed animation duration in seconds. We clamp to a minimum so the text
-  // doesn't race by too quickly if someone supplies a tiny value.
-  const durationSeconds = useMemo(() => {
-    const v = typeof speed === "number" ? Math.max(6, speed) : 20; // minimum 6s
-    return v;
-  }, [speed]);
-
-  useEffect(() => {
-    // Respect user's reduced motion preference
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handler = () => setPrefersReducedMotion(Boolean(mq.matches));
-    handler();
-    if (typeof mq.addEventListener === "function") {
-      mq.addEventListener("change", handler);
-      return () => mq.removeEventListener("change", handler);
-    } else {
-      // Older browsers (legacy MediaQueryList API).
-      // Support the older addListener/removeListener if present without using ts-ignore directives.
-      const legacy = mq as unknown as {
-        addListener?: (listener: (ev: MediaQueryListEvent) => void) => void;
-        removeListener?: (listener: (ev: MediaQueryListEvent) => void) => void;
-      };
-      if (typeof legacy.addListener === "function") {
-        legacy.addListener(handler);
-        return () => {
-          if (typeof legacy.removeListener === "function") {
-            legacy.removeListener(handler);
-          }
-        };
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    // Apply the computed animation duration to the marquee content element.
-    // The project's global stylesheet attaches `animation: marquee 20s linear infinite;`
-    // so overriding `animationDuration` is enough to change speed.
-    const el = contentRef.current;
-    if (!el) return;
-
-    if (prefersReducedMotion) {
-      el.style.animationPlayState = "paused";
-      el.style.animationDuration = "0s";
-    } else {
-      el.style.animationPlayState = "running";
-      el.style.animationDuration = `${durationSeconds}s`;
-    }
-  }, [durationSeconds, prefersReducedMotion]);
-
-  // For accessibility: render a non-animated list that screen readers can read easily.
-  // This avoids screen readers trying to follow the moving text.
-  const srList = (
-    <ul role="list" aria-hidden="false" className="sr-only">
-      {items.map((it, i) => (
-        <li key={i}>{it}</li>
-      ))}
-    </ul>
-  );
-
-  // Duplicate items for a smooth, continuous loop (CSS moves the entire container).
-  // The animation will translate by -50% so we see one full cycle, then loop seamlessly.
-  const repeatedItems = [...items, ...items];
-
   return (
-    <section
-      // Provide a descriptive region for assistive tech
-      aria-label="Skills marquee"
-      className={`marquee ${className}`}
-      title="Skills and tech stack — hover to pause"
+    <div
+      className={cn(
+        "group flex gap-[1rem] overflow-hidden",
+        direction === "left" ? "flex-row" : "flex-col",
+        className,
+      )}
+      style={{
+        maskImage: fade
+          ? `linear-gradient(${
+              direction === "left" ? "to right" : "to bottom"
+            }, transparent 0%, rgba(0, 0, 0, 1.0) 10%, rgba(0, 0, 0, 1.0) 90%, transparent 100%)`
+          : undefined,
+        WebkitMaskImage: fade
+          ? `linear-gradient(${
+              direction === "left" ? "to right" : "to bottom"
+            }, transparent 0%, rgba(0, 0, 0, 1.0) 10%, rgba(0, 0, 0, 1.0) 90%, transparent 100%)`
+          : undefined,
+      }}
+      {...rest}
     >
-      {/* Screen-reader friendly list (hidden visually) */}
-      {srList}
-
-      {/* Visual marquee content. The project's global.css defines .marquee-content animation
-          and hover behavior (pause on hover). We set animationDuration inline so 'speed' prop works. */}
-      <div
-        ref={contentRef}
-        className="marquee-content"
-        // inline style is kept empty because we set animationDuration from JS (see useEffect).
-        // We still include role/presentation so assistive tech won't re-announce animated text.
-        role="presentation"
-        aria-hidden="true"
-      >
-        {repeatedItems.map((text, idx) => (
-          <span
-            key={`${idx}-${text}`}
-            className="inline-block text-sm md:text-base px-4 py-2 text-muted-foreground"
+      {Array(numberOfCopies)
+        .fill(0)
+        .map((_, i) => (
+          <div
+            key={i}
+            className={cn(
+              "flex justify-around gap-[1rem] [--gap:1rem] shrink-0",
+              direction === "left"
+                ? "animate-marquee-left flex-row"
+                : "animate-marquee-up flex-col",
+              pauseOnHover && "group-hover:[animation-play-state:paused]",
+              reverse && "direction-reverse",
+              innerClassName,
+            )}
           >
-            {text}
-          </span>
+            {children}
+          </div>
         ))}
-      </div>
-    </section>
+    </div>
   );
 }

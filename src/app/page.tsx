@@ -6,7 +6,6 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Particles from "@/components/Particles";
 import ModernNav from "@/componets/ModernNav";
-import PartingClouds from "@/components/PartingClouds";
 import AudioPlayer from "@/components/AudioPlayer";
 import Marquee from "@/components/Marquee";
 import GitHubPlaylistLoader from "@/components/GitHubPlaylistLoader";
@@ -85,16 +84,14 @@ export default function Home() {
               <div className="space-y-4">
                 {/* Professional tagline */}
                 <h1 className="text-5xl md:text-7xl font-bold leading-tight gradient-text typing-animation">
-                  Developer • Systems tinkerer • Game maker
+                  Tasticp_
                 </h1>
               </div>
 
               {/* Short bio */}
               <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                I'm a developer and Mechatronics & Robotics student based in
-                Singapore. I build games, experiment with systems-level
-                projects, and contribute to open-source — I enjoy learning by
-                building.
+                I'm a Mechatronics & Robotics student based in Singapore. I
+                enjoy learning by building. I js fk arnd soooo
               </p>
 
               {/* Location */}
@@ -157,13 +154,25 @@ export default function Home() {
       {/* MARQUEE: animated tech-stack scroller (pauses on hover) */}
       <div className="relative z-10">
         <Marquee
-          items={[
-            "React • Next.js • TypeScript • Tailwind CSS",
-            "Rust • Python • Game Dev • Systems",
-            "Web APIs • Creative Coding • Open Source",
-          ]}
-          speed={28}
-        />
+          fade={true}
+          direction="left"
+          reverse={false}
+          pauseOnHover={true}
+          className="" // pass class to change gap or speed
+          innerClassName="" // pass class to change gap or speed
+        >
+          <div>• React </div>
+          <div>• Next.js </div>
+          <div>• TypeScript </div>
+          <div>• Tailwind CSS </div>
+          <div>• Rust </div>
+          <div>• Python </div>
+          <div>• Game Dev </div>
+          <div>• Systems </div>
+          <div>• Web APIs </div>
+          <div>• Creative Coding </div>
+          <div>• Open Source </div>
+        </Marquee>
       </div>
 
       {/* ABOUT */}
