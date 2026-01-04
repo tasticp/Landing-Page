@@ -16,7 +16,7 @@ interface ExperienceItem {
 const workExperience: ExperienceItem[] = [
   {
     id: 1,
-    company: "[Company Name]",
+    company: "Company",
     role: "[Your Role]",
     period: "[Start Date] - Present",
     description: [
@@ -36,7 +36,7 @@ const workExperience: ExperienceItem[] = [
   },
   {
     id: 3,
-    company: "[Another Company]",
+    company: "MindOx Techno",
     role: "[Role Title]",
     period: "[Start Date] - [End Date]",
     description: ["[Describe your responsibilities and achievements here]"],
@@ -57,6 +57,13 @@ const education: ExperienceItem[] = [
     id: 2,
     company: "[Previous Education]",
     role: "[Degree/Certificate]",
+    period: "[Start Year] - [End Year]",
+    description: ["[Add details about your education]"],
+  },
+  {
+    id: 3,
+    company: "Sembawang Secondary School",
+    role: "O Level && N Level",
     period: "[Start Year] - [End Year]",
     description: ["[Add details about your education]"],
   },
