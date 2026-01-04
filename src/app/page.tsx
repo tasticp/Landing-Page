@@ -1,15 +1,21 @@
 import { Card, CardContent } from "@/componets/ui/card";
 import { Badge } from "@/componets/ui/badge";
 import { Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
+import { Marquee } from "@/components/Marquee";
+import { Header } from "@/components/Header";
+import { HeroSection } from "@/components/HeroSection";
+import { ExperienceSection } from "@/components/ExperienceSection";
+import { FeaturedProjects } from "@/components/FeaturedProjects";
+import { RecentPosts } from "@/components/RecentPosts";
+import { Footer } from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Particles from "@/components/Particles";
 import ModernNav from "@/componets/ModernNav";
 import AudioPlayer from "@/components/AudioPlayer";
-import Marquee from "@/components/Marquee";
-import GitHubPlaylistLoader from "@/components/GitHubPlaylistLoader";
 
+import GitHubPlaylistLoader from "@/components/GitHubPlaylistLoader";
 /**
  * Home page for Kelvin Cheong (tasticp_)
  *
@@ -63,18 +69,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Background visual: particles */}
-      <Particles />
-
+      <Header />
       {/* GitHub Playlist Loader - fetches playlist from repo */}
       <GitHubPlaylistLoader
         owner="tasticp"
         repo="my-playlists"
         path="playlist.json"
       />
-
       {/* Top navigation (keeps current look/feel) */}
       <ModernNav />
-
       {/* HERO */}
       <section className="pt-32 px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -246,7 +249,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      <ExperienceSection />
       {/* EXPERIENCE */}
       <section id="experience" className="py-20 px-6 relative z-10">
         <div className="max-w-7xl mx-auto">

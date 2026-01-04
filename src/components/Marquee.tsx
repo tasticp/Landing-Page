@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from "react";
-import "./app/global.css";
-import "./lib/utils.ts";
+import "../app/global.css";
+import "../lib/utils.ts";
 
 export type MarqueeProps = HTMLAttributes<HTMLDivElement> & {
   children: ReactNode;

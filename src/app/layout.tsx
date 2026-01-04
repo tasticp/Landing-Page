@@ -1,19 +1,12 @@
-// Import Next.js Metadata type for page metadata configuration
-import type { Metadata } from "next";
-// Import Google Fonts: Geist (sans-serif) and Geist Mono (monospace)
-import { Geist, Geist_Mono } from "next/font/google";
-// Import global CSS styles
-import "./global.css";
-// Import ThemeProvider component for dark/light mode support
-import { ThemeProvider } from "@/componets/theme-provider";
+import type { Metadata } from "next"; // Import Next.js Metadata type for page metadata configuration
+import { Geist, Geist_Mono } from "next/font/google"; // Import Google Fonts: Geist (sans-serif) and Geist Mono (monospace)
+import "./global.css"; // Import global CSS styles
+import { ThemeProvider } from "@/componets/theme-provider"; // Import ThemeProvider component for dark/light mode support
 
-// Configure Geist font: Main sans-serif font for the site
-// variable: CSS variable name to use this font
-// subsets: Character sets to include (latin covers most languages)
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
+}); // Configure Geist font: Main sans-serif font for the site// variable: CSS variable name to use this font// subsets: Character sets to include (latin covers most languages)
 
 // Configure Geist Mono font: Monospace font for code blocks
 const geistMono = Geist_Mono({
@@ -26,7 +19,8 @@ export const metadata: Metadata = {
   // Page title shown in browser tab
   title: "Tasticp_ - Vibe Developer",
   // Meta description for search engines and social sharing
-  description: "Passionate about building exceptional web applications and exploring new technologies.",
+  description:
+    "Passionate about building exceptional web applications and exploring new technologies.",
 };
 
 // RootLayout: Wraps all pages in the application
