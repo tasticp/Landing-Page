@@ -19,25 +19,25 @@ interface BlogPost {
 const posts: BlogPost[] = [
   {
     id: 1,
-    title: "Building Scalable Microservices with Node.js",
+    title: "Shits im tryan learn",
     excerpt:
-      "Learn how to design and implement microservices architecture using Node.js, including best practices for communication, data management, and deployment strategies.",
-    tags: ["Node.js", "Microservices", "Architecture", "Docker"],
-    date: "Dec 15, 2024",
-    readTime: "8 min read",
-    views: 1245,
-    slug: "/blog/microservices-nodejs",
+      "Enim officia dolor ut laboris ipsum magna magna labore deserunt enim aliqua sint aliquip in commodo.",
+    tags: ["Node.js", "MINGW64", "smtg else", "Docker"],
+    date: "NOW , 2026",
+    readTime: "∞",
+    views: "???",
+    slug: "/blog/Shits im tryna learn",
   },
   {
     id: 2,
-    title: "TypeScript Best Practices for React Applications",
+    title: "Shits ive Learnt somewhat ?",
     excerpt:
-      "Discover essential TypeScript patterns and techniques for building robust React applications with proper type safety and improved developer experience.",
-    tags: ["TypeScript", "React", "Best Practices", "Frontend"],
-    date: "Nov 28, 2024",
-    readTime: "6 min read",
-    views: 892,
-    slug: "/blog/typescript-react-best-practices",
+      "Do laboris culpa consequat aute.",
+    tags: ["git", "C", "C++", "Python","PLC","HTML","CSS","Javascript","Packet Tracer"],
+    date: "NOW , 2026",
+    readTime: "∞ min learn",
+    views: "∞",
+    slug: "/blog/Shits ive Learnt somewhat ?",
   },
 ];
 

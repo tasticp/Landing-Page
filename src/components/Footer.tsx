@@ -13,30 +13,30 @@ export function Footer() {
         <div className="flex items-center gap-1 text-sm text-muted-foreground">
           <span>&copy; {currentYear}</span>
           <Link href="/" className="hover:text-foreground transition-colors">
-            alexchen.dev
+          https://tasticp.github.io/
           </Link>
           <span>|</span>
           <Link
             href="/privacy"
             className="hover:text-foreground transition-colors"
           >
-            privacy?
+            privacy ?
           </Link>
         </div>
 
         <div className="flex items-center gap-1">
           <Button variant="ghost" size="icon" className="h-9 w-9" asChild>
-            <a href="https://linkedin.com/in/alexchen" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/kelvin-cheong-tasticp/" target="_blank" rel="noopener noreferrer">
               <Linkedin className="h-4 w-4" />
             </a>
           </Button>
           <Button variant="ghost" size="icon" className="h-9 w-9" asChild>
-            <a href="https://github.com/alexchen" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4" />
             </a>
           </Button>
           <Button variant="ghost" size="icon" className="h-9 w-9" asChild>
-            <a href="mailto:alex.chen@example.com">
+            <a href="ricksue99@gmail.com">
               <Mail className="h-4 w-4" />
             </a>
           </Button>

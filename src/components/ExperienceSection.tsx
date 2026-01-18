@@ -16,35 +16,35 @@ interface ExperienceItem {
 const workExperience: ExperienceItem[] = [
   {
     id: 1,
-    company: "TechCorp Solutions",
-    role: "Senior Full Stack Developer",
-    period: "Jan 2022 - Present",
+    company: "aliqua culpa laborum",
+    role: "laborum Developer",
+    period: "20XX - 20XX",
     description: [
-      "Led development of microservices architecture serving 500K+ daily users",
-      "Reduced API response time by 40% through optimization and caching strategies",
-      "Mentored junior developers and conducted code reviews for team of 8",
+      "Excepteur in magna ea.",
+      "Eu eiusmod in duis et culpa do velit officia aute.",
+      "Occaecat cupidatat esse cupidatat velit sunt.",
     ],
   },
   {
     id: 2,
-    company: "Digital Innovations Lab",
-    role: "Full Stack Developer",
-    period: "Jun 2020 - Dec 2021",
+    company: "Mindox Techno",
+    role: "Intern",
+    period: "Apr 2024 - Aug 2024",
     description: [
-      "Built and maintained React applications with TypeScript and Node.js backends",
-      "Implemented CI/CD pipelines using GitHub Actions and Docker",
-      "Collaborated with UX team to improve user engagement by 25%",
+      "Elit officia ea non dolor qui laborum sunt nostrud.",
+      "Cillum nostrud do quis ullamco veniam sint et veniam occaecat ipsum aliquip officia Lorem cillum do.",
+      "Duis nostrud cupidatat irure dolore ipsum et nisi amet do tempor nisi reprehenderit fugiat.",
     ],
   },
   {
     id: 3,
-    company: "StartUp Ventures",
-    role: "Frontend Developer",
-    period: "Aug 2018 - May 2020",
+    company: "Royal Pickering",
+    role: "F&B Server",
+    period: "2023 - 2023",
     description: [
-      "Developed responsive web applications using React and modern JavaScript",
-      "Integrated RESTful APIs and implemented state management with Redux",
-      "Participated in agile development processes and daily standups",
+      "Tempor consectetur ea cillum.",
+      "Excepteur elit duis laboris velit eu elit enim aute ea amet Lorem consectetur duis fugiat velit.",
+      "Officia consequat excepteur eiusmod cupidatat veniam aute.",
     ],
   },
 ];
@@ -52,9 +52,9 @@ const workExperience: ExperienceItem[] = [
 const education: ExperienceItem[] = [
   {
     id: 1,
-    company: "National University of Singapore",
-    role: "Bachelor of Computing in Computer Science",
-    period: "2014 - 2018",
+    company: "est veniam tempor of Singapore",
+    role: "ipsum of proident in commodo",
+    period: "20XX - 20XX",
     description: [
       "Graduated with Honors (GPA: 3.8/4.0)",
       "Relevant coursework: Data Structures, Algorithms, Web Development, Database Systems",
@@ -63,13 +63,36 @@ const education: ExperienceItem[] = [
   },
   {
     id: 2,
-    company: "Singapore Polytechnic",
-    role: "Diploma in Information Technology",
-    period: "2011 - 2013",
+    company: "Ngee Ann Polytechnic",
+    role: "Diploma in Mechatronics & Robotics",
+    period: "Apr 2025 - Apr 2027",
     description: [
-      "Completed with Merit, specialized in Software Development",
+      "Graduated with Honors (GPA: 3.8/4.0), Completed with Merit, specialized in Software Development",
       "Final year project: E-commerce platform with payment integration",
       "Dean's List for academic excellence",
+    ],
+  },
+  {
+    id: 3,
+    company: "Institute of Technical Education",
+    role: "Diploma in Mechatronics & Robotics",
+    period: "Apr 2025 - Apr 2027",
+    description: [
+      "Graduated (raw GPA: 3.75/4.0), Completed with excepteur",
+      "Final year project: Anim officia minim adipisicing anim tempor in proident quis aute.",
+      "Director's List",
+    ],
+  },
+  {
+    id: 4,
+    company: "Sembawang Secondary School",
+    role: "O/N Level Certificate",
+    period: "Jan 2019 - Dec 2022",
+    description: [
+      "Graduated ([raw GPA: 11] [net GPA: 9])",
+      "SYF - Certificate of Accomplishment in 2021",
+      "Band Major in Woodwind band - 2022 Section Leader in Woodwind band ",
+      "2020 Head Librarian in Woodwind band - 2020 Cyber Wellness Leader - 2019 Upper Sec CCA Committee Leader",
     ],
   },
 ];

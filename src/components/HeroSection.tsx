@@ -15,16 +15,16 @@ export function HeroSection() {
                 hi Alex Chen here.
               </h1>
               <p className="text-lg text-muted-foreground">
-                28yo Full Stack Developer from Singapore
+                ??yo Developer from Singapore
               </p>
             </div>
 
             <p className="text-foreground/90 max-w-md">
-              Passionate about creating elegant solutions to complex problems. I build scalable web applications and delightful user experiences.
+            Exercitation ipsum cupidatat id ex reprehenderit ipsum elit est veniam eiusmod eu.
             </p>
 
             <p className="text-foreground">
-              Open to collaborations and exciting opportunities
+              Open to collaborations & fucking arnd
             </p>
 
             <p className="text-sm text-muted-foreground">
@@ -32,7 +32,7 @@ export function HeroSection() {
               <a href="#" className="text-primary hover:underline">
                 AI/ML integration
               </a>{" "}
-              in web applications.
+              in applications maybe.
             </p>
 
             <div className="flex items-center gap-3 pt-2">
@@ -43,17 +43,17 @@ export function HeroSection() {
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="h-10 w-10" asChild>
-                <a href="https://linkedin.com/in/alexchen" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/kelvin-cheong-tasticp/" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-5 w-5" />
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="h-10 w-10" asChild>
-                <a href="https://github.com/alexchen" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer">
                   <Github className="h-5 w-5" />
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="h-10 w-10" asChild>
-                <a href="mailto:alex.chen@example.com">
+                <a href="ricksue99@gmail.com">
                   <Mail className="h-5 w-5" />
                 </a>
               </Button>
@@ -69,7 +69,7 @@ export function HeroSection() {
                     <span className="text-4xl text-muted-foreground/50">AC</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    Alex Chen
+                    Tasticp
                   </p>
                 </div>
               </div>

@@ -33,13 +33,13 @@ export default function ContactPage() {
                 <CardHeader>
                   <CardTitle className="text-lg">Get in touch</CardTitle>
                   <CardDescription>
-                    I typically respond within 24 hours. Looking forward to connecting!
+                  Laborum reprehenderit enim id.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3 text-foreground/80">
                     <Mail className="h-5 w-5 text-primary" />
-                    <span>alex.chen@example.com</span>
+                    <span>ricksue99@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-3 text-foreground/80">
                     <MapPin className="h-5 w-5 text-primary" />
@@ -54,17 +54,17 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent className="flex gap-2">
                   <Button variant="outline" size="icon" asChild>
-                    <a href="https://linkedin.com/in/alexchen" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/kelvin-cheong-tasticp/" target="_blank" rel="noopener noreferrer">
                       <Linkedin className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="https://github.com/alexchen" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/tasticp" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="mailto:alex.chen@example.com">
+                    <a href="ricksue99@gmail.com">
                       <Mail className="h-4 w-4" />
                     </a>
                   </Button>
