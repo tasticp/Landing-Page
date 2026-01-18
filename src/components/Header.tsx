@@ -1,16 +1,29 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { Sun, Moon, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Copy, Moon, Sun } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export function Header() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Get theme from localStorage or default to dark
+    const savedTheme =
+      (localStorage.getItem("theme") as "dark" | "light") || "dark";
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle("light", savedTheme === "light");
+  }, []);
 
   const toggleTheme = () => {
+    if (!mounted) return;
+
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
     document.documentElement.classList.toggle("light", newTheme === "light");
   };
 
@@ -59,7 +72,7 @@ export function Header() {
             className="h-9 w-9"
             onClick={toggleTheme}
           >
-            {theme === "dark" ? (
+            {mounted && theme === "dark" ? (
               <Sun className="h-4 w-4" />
             ) : (
               <Moon className="h-4 w-4" />

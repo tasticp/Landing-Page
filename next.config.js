@@ -2,6 +2,9 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
+  distDir: 'out',
+  skipTrailingSlashRedirect: true,
+  assetPrefix: '',
   images: {
     unoptimized: true,
     domains: [
