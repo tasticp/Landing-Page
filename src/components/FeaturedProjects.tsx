@@ -18,18 +18,18 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "[Project Name 1]",
-    description: "[Brief description of your project and what it does]",
-    tags: ["React", "TypeScript", "Tailwind", "Node.js"],
-    websiteUrl: "#",
-    sourceUrl: "#",
+    title: "TaskFlow Pro",
+    description: "A comprehensive project management tool with real-time collaboration, Kanban boards, and advanced analytics dashboard for teams.",
+    tags: ["React", "TypeScript", "Node.js", "PostgreSQL", "Socket.io"],
+    websiteUrl: "https://taskflow-demo.vercel.app",
+    sourceUrl: "https://github.com/alexchen/taskflow-pro",
   },
   {
     id: 2,
-    title: "[Project Name 2]",
-    description: "[Brief description of your project and what it does]",
-    tags: ["Python", "FastAPI", "Docker", "PostgreSQL"],
-    sourceUrl: "#",
+    title: "AI Content Generator",
+    description: "A platform that leverages OpenAI API to generate SEO-optimized content, blog posts, and marketing copy for businesses.",
+    tags: ["Next.js", "Python", "FastAPI", "OpenAI", "Redis"],
+    sourceUrl: "https://github.com/alexchen/ai-content-generator",
   },
 ];
 

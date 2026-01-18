@@ -8,33 +8,34 @@ import { Globe, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "[Project Name 1]",
-    description: "[Brief description of your project and what it does]",
-    tags: ["React", "TypeScript", "Tailwind", "Node.js"],
-    websiteUrl: "#",
-    sourceUrl: "#",
+    title: "TaskFlow Pro",
+    description: "A comprehensive project management tool with real-time collaboration, Kanban boards, and advanced analytics dashboard for teams.",
+    tags: ["React", "TypeScript", "Node.js", "PostgreSQL", "Socket.io"],
+    websiteUrl: "https://taskflow-demo.vercel.app",
+    sourceUrl: "https://github.com/alexchen/taskflow-pro",
   },
   {
     id: 2,
-    title: "[Project Name 2]",
-    description: "[Brief description of your project and what it does]",
-    tags: ["Python", "FastAPI", "Docker", "PostgreSQL"],
-    sourceUrl: "#",
+    title: "AI Content Generator",
+    description: "A platform that leverages OpenAI API to generate SEO-optimized content, blog posts, and marketing copy for businesses.",
+    tags: ["Next.js", "Python", "FastAPI", "OpenAI", "Redis"],
+    sourceUrl: "https://github.com/alexchen/ai-content-generator",
   },
   {
     id: 3,
-    title: "[Project Name 3]",
-    description: "[Brief description of your project and what it does]",
-    tags: ["Next.js", "Prisma", "PostgreSQL"],
-    websiteUrl: "#",
-    sourceUrl: "#",
+    title: "E-Commerce Platform",
+    description: "Full-stack e-commerce solution with payment integration, inventory management, and admin dashboard for small businesses.",
+    tags: ["Next.js", "Prisma", "PostgreSQL", "Stripe", "Tailwind"],
+    websiteUrl: "https://shop-demo.vercel.app",
+    sourceUrl: "https://github.com/alexchen/ecommerce-platform",
   },
   {
     id: 4,
-    title: "[Project Name 4]",
-    description: "[Brief description of your project and what it does]",
-    tags: ["Vue.js", "Firebase", "Tailwind"],
-    websiteUrl: "#",
+    title: "Real-Time Chat App",
+    description: "A messaging application with end-to-end encryption, file sharing, and video calling capabilities built with WebRTC.",
+    tags: ["Vue.js", "Firebase", "WebRTC", "Vuex", "Tailwind"],
+    websiteUrl: "https://chat-demo.vercel.app",
+    sourceUrl: "https://github.com/alexchen/realtime-chat",
   },
 ];
 
@@ -46,8 +47,7 @@ export default function ProjectsPage() {
         <div className="container">
           <h1 className="text-4xl font-bold mb-8">projects</h1>
           <p className="text-muted-foreground mb-12 max-w-2xl">
-            [Add a brief introduction about your projects here. Describe what
-            kind of projects you work on and what you're passionate about.]
+            A collection of my personal and professional projects. I enjoy building full-stack applications, exploring new technologies, and solving complex problems through clean, efficient code.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">

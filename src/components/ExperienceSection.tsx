@@ -16,49 +16,61 @@ interface ExperienceItem {
 const workExperience: ExperienceItem[] = [
   {
     id: 1,
-    company: "[Company Name]",
-    role: "[Your Role]",
-    period: "[Start Date] - Present",
+    company: "TechCorp Solutions",
+    role: "Senior Full Stack Developer",
+    period: "Jan 2022 - Present",
     description: [
-      "[Describe your responsibilities and achievements here]",
-      "[Add more bullet points as needed]",
+      "Led development of microservices architecture serving 500K+ daily users",
+      "Reduced API response time by 40% through optimization and caching strategies",
+      "Mentored junior developers and conducted code reviews for team of 8",
     ],
   },
   {
     id: 2,
-    company: "[Previous Company]",
-    role: "[Previous Role]",
-    period: "[Start Date] - [End Date]",
+    company: "Digital Innovations Lab",
+    role: "Full Stack Developer",
+    period: "Jun 2020 - Dec 2021",
     description: [
-      "[Describe your responsibilities and achievements here]",
-      "[Add more bullet points as needed]",
+      "Built and maintained React applications with TypeScript and Node.js backends",
+      "Implemented CI/CD pipelines using GitHub Actions and Docker",
+      "Collaborated with UX team to improve user engagement by 25%",
     ],
   },
   {
     id: 3,
-    company: "[Another Company]",
-    role: "[Role Title]",
-    period: "[Start Date] - [End Date]",
-    description: ["[Describe your responsibilities and achievements here]"],
+    company: "StartUp Ventures",
+    role: "Frontend Developer",
+    period: "Aug 2018 - May 2020",
+    description: [
+      "Developed responsive web applications using React and modern JavaScript",
+      "Integrated RESTful APIs and implemented state management with Redux",
+      "Participated in agile development processes and daily standups",
+    ],
   },
 ];
 
 const education: ExperienceItem[] = [
   {
     id: 1,
-    company: "[University/School Name]",
-    role: "[Degree/Program]",
-    period: "[Start Year] - [End Year]",
+    company: "National University of Singapore",
+    role: "Bachelor of Computing in Computer Science",
+    period: "2014 - 2018",
     description: [
-      "[Describe your studies, achievements, or relevant coursework]",
+      "Graduated with Honors (GPA: 3.8/4.0)",
+      "Relevant coursework: Data Structures, Algorithms, Web Development, Database Systems",
+      "President of Coding Club, organized hackathons and tech talks",
     ],
   },
   {
     id: 2,
-    company: "[Previous Education]",
-    role: "[Degree/Certificate]",
-    period: "[Start Year] - [End Year]",
-    description: ["[Add details about your education]"],
+    company: "Singapore Polytechnic",
+    role: "Diploma in Information Technology",
+    period: "2011 - 2013",
+    description: [
+      "Completed with Merit, specialized in Software Development",
+      "Final year project: E-commerce platform with payment integration",
+      "Dean's List for academic excellence",
+    ],
   },
 ];
 

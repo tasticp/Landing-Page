@@ -23,8 +23,7 @@ export default function ContactPage() {
         <div className="container max-w-4xl">
           <h1 className="text-4xl font-bold mb-8">contact</h1>
           <p className="text-muted-foreground mb-12 max-w-2xl">
-            [Add a brief message about getting in touch. Let visitors know
-            you're open to opportunities, collaborations, or just a chat.]
+            I'm always interested in hearing about new opportunities, collaborations, or just having a chat about technology and development. Feel free to reach out!
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -34,17 +33,17 @@ export default function ContactPage() {
                 <CardHeader>
                   <CardTitle className="text-lg">Get in touch</CardTitle>
                   <CardDescription>
-                    [Add a friendly message here]
+                    I typically respond within 24 hours. Looking forward to connecting!
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3 text-foreground/80">
                     <Mail className="h-5 w-5 text-primary" />
-                    <span>[your@email.com]</span>
+                    <span>alex.chen@example.com</span>
                   </div>
                   <div className="flex items-center gap-3 text-foreground/80">
                     <MapPin className="h-5 w-5 text-primary" />
-                    <span>[Your Location]</span>
+                    <span>Singapore</span>
                   </div>
                 </CardContent>
               </Card>
@@ -55,17 +54,17 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent className="flex gap-2">
                   <Button variant="outline" size="icon" asChild>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <a href="https://linkedin.com/in/alexchen" target="_blank" rel="noopener noreferrer">
                       <Linkedin className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/alexchen" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="mailto:[your@email.com]">
+                    <a href="mailto:alex.chen@example.com">
                       <Mail className="h-4 w-4" />
                     </a>
                   </Button>

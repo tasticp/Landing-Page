@@ -19,25 +19,25 @@ interface BlogPost {
 const posts: BlogPost[] = [
   {
     id: 1,
-    title: "[Blog Post Title 1]",
+    title: "Building Scalable Microservices with Node.js",
     excerpt:
-      "[Brief description of what this blog post is about. Add a compelling summary here.]",
-    tags: ["Tag1", "Tag2", "Tag3"],
-    date: "[Month Day, Year]",
-    readTime: "[X] min read",
-    views: 0,
-    slug: "#",
+      "Learn how to design and implement microservices architecture using Node.js, including best practices for communication, data management, and deployment strategies.",
+    tags: ["Node.js", "Microservices", "Architecture", "Docker"],
+    date: "Dec 15, 2024",
+    readTime: "8 min read",
+    views: 1245,
+    slug: "/blog/microservices-nodejs",
   },
   {
     id: 2,
-    title: "[Blog Post Title 2]",
+    title: "TypeScript Best Practices for React Applications",
     excerpt:
-      "[Brief description of what this blog post is about. Add a compelling summary here.]",
-    tags: ["Tag4", "Tag5", "Tag6"],
-    date: "[Month Day, Year]",
-    readTime: "[X] min read",
-    views: 0,
-    slug: "#",
+      "Discover essential TypeScript patterns and techniques for building robust React applications with proper type safety and improved developer experience.",
+    tags: ["TypeScript", "React", "Best Practices", "Frontend"],
+    date: "Nov 28, 2024",
+    readTime: "6 min read",
+    views: 892,
+    slug: "/blog/typescript-react-best-practices",
   },
 ];
 

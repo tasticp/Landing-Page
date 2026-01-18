@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { FeaturedProjects } from "@/components/FeaturedProjects";
-import { RecentPosts } from "@/components/RecentPosts";
+import { RecentPosts } from "@/components/RecentPost";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
