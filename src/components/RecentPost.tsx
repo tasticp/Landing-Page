@@ -25,7 +25,7 @@ const posts: BlogPost[] = [
     tags: ["Node.js", "MINGW64", "smtg else", "Docker"],
     date: "NOW , 2026",
     readTime: "∞",
-    views: "???",
+    views: 6969,
     slug: "/blog/Shits im tryna learn",
   },
   {
@@ -36,7 +36,7 @@ const posts: BlogPost[] = [
     tags: ["git", "C", "C++", "Python","PLC","HTML","CSS","Javascript","Packet Tracer"],
     date: "NOW , 2026",
     readTime: "∞ min learn",
-    views: "∞",
+    views: 6969,
     slug: "/blog/Shits ive Learnt somewhat ?",
   },
 ];

@@ -13,7 +13,7 @@ const posts = [
       "Enim officia dolor ut laboris ipsum magna magna labore deserunt enim aliqua sint aliquip in commodo.",
     tags: ["Node.js", "MINGW64", "smtg else", "Docker"],
     date: "NOW , 2026",
-    readTime: "∞",
+    readTime: 6969,
     views: "???",
     slug: "/blog/Shits im tryna learn",
   },
@@ -25,7 +25,7 @@ const posts = [
     tags: ["git", "C", "C++", "Python","PLC","HTML","CSS","Javascript","Packet Tracer"],
     date: "NOW , 2026",
     readTime: "∞ min learn",
-    views: "∞",
+    views: 6969,
     slug: "/blog/Shits ive Learnt somewhat ?",
   },
   {
