@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Linkedin, Github, Mail, FileText } from "lucide-react";
-const [imageError, setImageError] = useState(false);
+
 export function HeroSection() {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <section className="py-12 md:py-20">
       <div className="container">
@@ -53,14 +56,14 @@ export function HeroSection() {
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="h-10 w-10" asChild>
-                <a href="ricksue99@gmail.com">
+                <a href="mailto:ricksue99@gmail.com">
                   <Mail className="h-5 w-5" />
                 </a>
               </Button>
             </div>
           </div>
 
-          {/* Right side - Profile photo placeholder */}
+          {/* Right side - Profile photo */}
           <div className="relative">
             <div className="w-64 h-80 md:w-72 md:h-96 rounded-lg overflow-hidden bg-card border-2 border-border shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
               {!imageError ? (
