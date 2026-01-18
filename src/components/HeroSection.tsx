@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Linkedin, Github, Mail, FileText } from "lucide-react";
-
+const [imageError, setImageError] = useState(false);
 export function HeroSection() {
   return (
     <section className="py-12 md:py-20">
@@ -20,7 +20,7 @@ export function HeroSection() {
             </div>
 
             <p className="text-foreground/90 max-w-md">
-            Exercitation ipsum cupidatat id ex reprehenderit ipsum elit est veniam eiusmod eu.
+              Exercitation ipsum cupidatat id ex reprehenderit ipsum elit est veniam eiusmod eu.
             </p>
 
             <p className="text-foreground">
@@ -63,17 +63,23 @@ export function HeroSection() {
           {/* Right side - Profile photo placeholder */}
           <div className="relative">
             <div className="w-64 h-80 md:w-72 md:h-96 rounded-lg overflow-hidden bg-card border-2 border-border shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-              <img src="https://avatars.githubusercontent.com/u/170114934?v=4" alt="tasticp" class="w-full h-full object-cover"></img>
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-card">
-                <div className="text-center p-4">
-                  <div className="w-24 h-24 mx-auto rounded-full bg-muted-foreground/20 flex items-center justify-center mb-4">
-                    <span className="text-4xl text-muted-foreground/50">GT</span>
+              {!imageError ? (
+                <img
+                  src="https://avatars.githubusercontent.com/u/170114934?v=4"
+                  alt="tasticp"
+                  className="w-full h-full object-cover"
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-card">
+                  <div className="text-center p-4">
+                    <div className="w-24 h-24 mx-auto rounded-full bg-muted-foreground/20 flex items-center justify-center mb-4">
+                      <span className="text-4xl text-muted-foreground/50">GT</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">Tasticp</p>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Tasticp
-                  </p>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
